@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     PenggunaController
 };
 use App\Http\Controllers\Auth\AuthController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(DashboardController::class)->group(function(){
@@ -23,3 +24,8 @@ Route::resource('kelas',KelasController::class);
 Route::resource('pengguna',PenggunaController::class);
 Route::resource('aktivitas',AktivitasController::class);
 Route::resource('arsip',ArsipController::class);
+
+Route::get('/generatepdf', function(){
+    $pdf = Pdf::loadView('pdf.index');
+    return $pdf->stream('download.pdf');
+});

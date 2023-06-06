@@ -6,6 +6,7 @@ use App\Http\Requests\PostPenggunaRequest;
 use App\Http\Requests\UpdatePenggunaRequest;
 use App\Models\Kelas;
 use App\Models\Pengguna;
+use App\Models\PenggunaKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,6 @@ class PenggunaController extends Controller
     {
         try {
             $data = [
-                'kelas_id' => $request->kelas_id,
                 'nama' => $request->nama,
                 'jk' => $request->jk,
                 'email' => $request->email,
@@ -42,7 +42,10 @@ class PenggunaController extends Controller
                 $data['profile'] = $path;
             }
             
-            Pengguna::create($data);
+            $pengguna = Pengguna::create($data);
+            foreach ($request->kelas_id as $kelas) {
+                PenggunaKelas::create(['kelas_id' => $kelas, 'pengguna_id' => $pengguna->id]);
+            }
 
             return redirect()->route('pengguna.index')->with('msg_success', 'Berhasil menambahkan pengguna');
         } catch (\Throwable $th) {
@@ -67,8 +70,8 @@ class PenggunaController extends Controller
     public function update(UpdatePenggunaRequest $request, Pengguna $pengguna)
     {
         try {
+            $kelas = PenggunaKelas::where('pengguna_id', $pengguna->id)->get();
             $data = [
-                'kelas_id' => $request->kelas_id,
                 'nama' => $request->nama,
                 'jk' => $request->jk,
                 'email' => $request->email,
@@ -85,6 +88,9 @@ class PenggunaController extends Controller
                 Storage::disk('public')->delete("$pengguna->profile");
             }
             $pengguna->update($data);
+            foreach ($request->kelas_id as $kelas) {
+                $kelas->update(['kelas_id' => $kelas]);
+            }
 
             return redirect()->route('pengguna.index')->with('msg_success', 'Berhasil mengubah pengguna');
         } catch (\Throwable $th) {

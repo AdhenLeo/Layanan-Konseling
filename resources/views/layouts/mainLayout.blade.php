@@ -19,6 +19,8 @@
         integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('assets/js/iziAlert.js') }}"></script>
+    {{-- multiple select --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
     @stack('js-top')
     @vite('resources/css/app.css')
     <title>@yield('title')</title>
@@ -48,9 +50,10 @@
         </script>
     @endif
 
-    @stack('js')
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
     <script src="{{ asset('assets/js/menu.js') }}"></script>
     <script src="{{ asset('assets/js/dropdown.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

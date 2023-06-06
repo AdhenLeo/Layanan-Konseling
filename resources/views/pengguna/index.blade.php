@@ -30,7 +30,11 @@ Pengguna
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $data->nama }}</td>
                     <td>{{ $data->email }}</td>
-                    <td>{{ $data->kelas->nama }}</td>
+                    <td>
+                        @foreach ($data->kelas as $kelas)
+                            {{ $kelas->nama }},
+                        @endforeach
+                    </td>
                     <td>
                         <div class="flex gap-2 items-center">
                             <a href="{{ route('pengguna.show', $data->id) }}" class="btn-detail">Detail</a>

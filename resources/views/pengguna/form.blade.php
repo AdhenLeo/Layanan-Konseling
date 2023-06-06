@@ -36,7 +36,7 @@
                             <option value='{{  $jenis_kelamin }}' {{ isset($data) ? ($data->jk == $jenis_kelamin ? "selected" : "") : '' }}>{{ $jenis_kelamin }}</option>
                             @endforeach
                         </select>
-                        <select name="kelas_id" id="" class="input-select-sm">
+                        <select name="role" id="" class="input-select-sm">
                             <option value="" selected hidden>Pilih Role</option>
                             @foreach ($roles as $role)
                             <option value='{{  $role }}' {{ isset($data) ? ($data->role == $role ? "selected" : "") : '' }} class="capitalize">{{ $role }}</option>
@@ -50,8 +50,7 @@
                 </div>
                 <div class="mt-3">
                     <p class="font-semibold text-base text-non-active mb-2">Kelas</p>
-                    <select name="kelas_id" id="" class="input-select">
-                        <option value="" selected hidden>Pilih Kelas</option>
+                    <select name="kelas_id[]" id="kelas_id" class="">
                         @foreach ($datas as $kelas)
                         <option value='{{  $kelas->id }}' {{ isset($data) ? ($data->kelas_id == $kelas->id ? "selected" : "") : '' }}>{{ $kelas->nama }}</option>
                         @endforeach
@@ -90,5 +89,8 @@
 @endsection
 
 @push('js')
+    <script>
+        new MultiSelectTag('kelas_id')  // id
+    </script>
     <script src="{{ asset('assets/js/drag&drop.js') }}"></script>
 @endpush
