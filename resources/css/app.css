@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*costume class tailwind*/
+@layer components{
+    .icon-active {
+        @apply bg-primary w-14 h-14 items-center rounded-xl justify-center flex
+    }
+    .icon-active-responsive {
+        @apply bg-primary items-center w-full flex px-2 py-3
+    }
+    .card-sum {
+        @apply sm:w-[24vw] w-[93vw] h-24 bg-white rounded-2xl px-5 flex items-center
+    }
+    .btn-primary{
+        @apply px-4 py-3 text-base text-white bg-primary opacity-90 transition-colors hover:opacity-100 rounded-xl font-semibold
+    }
+    .btn-primary-danger{
+        @apply px-4 py-3 text-base text-white bg-danger opacity-90 transition-colors hover:opacity-100 rounded-xl font-semibold
+    }
+    .btn-detail{
+        @apply py-2 px-3 rounded-lg bg-primary text-white font-semibold text-base
+    }
+    .btn-warning{
+        @apply py-2 px-5 rounded-lg bg-warning text-white font-semibold text-base
+    }
+    .btn-danger{
+        @apply py-2 px-3 rounded-lg bg-danger text-white font-semibold text-base
+    }
+    .btn-primary-form{
+        @apply px-7 py-2 text-base text-white bg-primary opacity-90 transition-colors hover:opacity-100 rounded-lg font-semibold
+    }
+    .btn-back-form{
+        @apply px-7 py-2 text-base border rounded-lg font-semibold
+    }
+    .input-form{
+        @apply border rounded-lg p-2 border-non-active focus:outline-primary w-full
+    }
+    .input-error{
+        @apply border rounded-lg p-2 border-danger focus:outline-danger w-full
+    }
+    .input-select{
+        @apply border rounded-lg p-3 border-non-active focus:outline-primary w-full
+    }
+    .input-select-sm{
+        @apply border rounded-lg p-3 border-non-active focus:outline-primary sm:w-1/2 w-full 
+    }
+    .badge-pending{
+        @apply text-[13px] font-bold px-3 py-1 rounded-xl bg-secondary
+    }
+    .badge-danger{
+        @apply text-[13px] font-bold px-3 py-1 rounded-xl bg-danger-secondary
+    }
+    .badge-success{
+        @apply text-[13px] font-bold px-3 text-center py-1 rounded-xl bg-success-secondary
+    }
+    .modal {
+        @apply rounded-xl p-5 sm:w-2/5 w-10/12
+    }
+    .radio-active{
+        @apply bg-primary text-white cursor-pointer font-semibold text-base flex items-center rounded-xl w-full p-3
+    }
+    .radio-non-active{
+        @apply bg-white hover:bg-secondary shadow-card cursor-pointer font-semibold text-base flex items-center rounded-xl w-full p-3
+    }
+}
+
+@layer base {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    li,
+    li a {
+        display:flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 17px;
+        color: #c0c0c0;
+        margin-bottom: 10px;
+    }
+
+    table thead th p {
+        display: flex;
+        align-items: start;
+    }
+
+    table tbody{
+        font-size: 16;
+        font-weight: 600;
+    }
+}
