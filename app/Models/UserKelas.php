@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GuruKelas extends Model
+class UserKelas extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,8 @@ class GuruKelas extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
-    public function guru()
+    public function user()
     {
-        return $this->belongsTo(Guru::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -15,10 +15,4 @@ class Guru extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function kelas()
-    {
-        return $this->belongsToMany(Kelas::class, GuruKelas::class);
-    }
-
 }

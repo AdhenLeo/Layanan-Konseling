@@ -10,4 +10,14 @@ class Pertemuan extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function siswa()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function guru()
+    {
+        return $this->belongsTo(User::class, 'guru_id');
+    }
 }

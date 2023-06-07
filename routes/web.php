@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     ArsipController,
     DashboardController,
     KelasController,
+    PertemuanController,
     UserController
 };
 use App\Http\Controllers\Auth\AuthController;
@@ -24,6 +25,7 @@ Route::resource('kelas',KelasController::class);
 Route::resource('user',UserController::class);
 Route::resource('aktivitas',AktivitasController::class);
 Route::resource('arsip',ArsipController::class);
+Route::resource('pertemuan',PertemuanController::class);
 
 Route::get('/generatepdf', function(){
     $pdf = Pdf::loadView('pdf.index');

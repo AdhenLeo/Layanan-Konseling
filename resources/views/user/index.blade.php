@@ -19,7 +19,7 @@ Users
         <table class="w-full" cellpadding='10' cellspacing='0'>
             <thead class="text-non-active border-b border-non-active">
                 <th><p>No</p></th>
-                <th><p class="min-w-20">Nama</p></th>
+                <th><p class="min-w-20 overflow-auto">Nama</p></th>
                 <th><p class="min-w-20">Email</p></th>
                 <th><p class="min-w-15">Kelas</p></th>
                 <th><p class="min-w-20">Aksi</p></th>
@@ -31,9 +31,9 @@ Users
                     <td>{{ $data->nama }}</td>
                     <td>{{ $data->email }}</td>
                     <td>
-                        {{-- @foreach ($data->kelas as $kelas)
+                        @foreach ($data->kelas as $kelas)
                             {{ $kelas->nama }},
-                        @endforeach --}}
+                        @endforeach
                     </td>
                     <td>
                         <div class="flex gap-2 items-center">

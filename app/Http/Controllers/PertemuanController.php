@@ -2,84 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\pertemuan\{
+    PostPertemuanRequest,
+    UpdatePertemuanRequest
+};
 use App\Models\Pertemuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PertemuanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $datas = Pertemuan::with('siswa', 'guru')->get();
+        dd($datas);
+        return view('pertemuan.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('pertemuan.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(PostPertemuanRequest $request)
     {
-        //
+        try {
+            $data = [
+                'user_id' => $request->user_id,
+                // 'guru_id' => Auth::check() ? (Auth::user()->role == 'guru' ? Auth::user()->id : $request->guru_id) : null,
+                'guru_id' =>$request->guru_id,
+                'tema' => $request->tema,
+                'tgl' => $request->tgl,
+                'tmpt' => $request->tmpt,
+                'deskripsi' => $request->deskripsi,
+                // 'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'done' : 'waiting') : null
+                'status' => 'waiting'
+            ];
+            
+            
+            $pertemuan = Pertemuan::create($data);
+            dd($pertemuan);
+
+            return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil menambahkan pertemuan');
+        } catch (\Throwable $th) {
+            return redirect()->route('pertemuan.index')->with('msg_error', 'Gagal menambahkan pertemuan');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pertemuan  $pertemuan
-     * @return \Illuminate\Http\Response
-     */
     public function show(Pertemuan $pertemuan)
     {
-        //
+        $data = Pertemuan::find($pertemuan->id);
+        return view('pertemuan.show', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pertemuan  $pertemuan
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Pertemuan $pertemuan)
     {
-        //
+        $data = $pertemuan;
+        return view('pertemuan.form', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pertemuan  $pertemuan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Pertemuan $pertemuan)
+    public function update(UpdatePertemuanRequest $request, Pertemuan $pertemuan)
     {
-        //
+        try {
+            $data = [
+                'tgl' => $request->tgl,
+                'tmpt' => $request->tmpt,
+            ];
+
+            $pertemuan->update($data);
+
+            return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil mengubah pertemuan');
+        } catch (\Throwable $th) {
+            return redirect()->route('pertemuan.index')->with('msg_error', 'Gagal mengubah pertemuan');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pertemuan  $pertemuan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Pertemuan $pertemuan)
     {
-        //
+        if(!$pertemuan) return abort(404);
+
+        $pertemuan->delete();
+
+        return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil menghapus pertemuan');
     }
 }

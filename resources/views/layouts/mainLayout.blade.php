@@ -21,7 +21,11 @@
     <script src="{{ asset('assets/js/iziAlert.js') }}"></script>
     {{-- multiple select --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-    @stack('js-top')
+    {{-- jquery --}}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     @vite('resources/css/app.css')
     <title>@yield('title')</title>
     @stack('css')

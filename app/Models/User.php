@@ -28,7 +28,12 @@ class User extends Authenticatable
         return $this->hasOne(Guru::class);
     }
 
-    public function Log()
+    public function kelas()
+    {
+        return $this->belongsToMany(Kelas::class, UserKelas::class);
+    }
+
+    public function log()
     {
         return $this->hasMany(Log::class);
     }

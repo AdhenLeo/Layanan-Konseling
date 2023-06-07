@@ -23,7 +23,6 @@ class AuthController extends Controller
         $data = User::where('email', $request->email)->first();
         
         if(!$data || !Hash::check($request->password, $data->password)){
-            dd('gagal login');
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }
         

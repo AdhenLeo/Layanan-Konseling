@@ -13,6 +13,7 @@ use App\Models\{
     Kelas,
     Pengguna,
     PenggunaKelas,
+    UserKelas,
     WaliKelas
 };
 use Illuminate\Support\Facades\{
@@ -25,7 +26,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $datas = User::paginate(4);
+        $datas = User::with('kelas')->paginate(4);
         return view('user.index', compact('datas'));
     }
 
@@ -49,7 +50,6 @@ class UserController extends Controller
             ];
 
             
-            
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
@@ -59,8 +59,10 @@ class UserController extends Controller
             
             // mengecek role
             $request->role == 'guru' ? $this->storeGuru($request->all(), $user->id) : ($request->role == 'walas' ? $this->storeWalas($request->all(), $user->id) : null);
-            // $request->role == 'walas' ? $this->storeWalas($request->all(), $user->id) : null;
 
+            foreach($request->kelas_id as $kelas){
+                UserKelas::create(['user_id' => $user->id, 'kelas_id' => $kelas]);
+            }
 
             return redirect()->route('user.index')->with('msg_success', 'Berhasil menambahkan user');
         } catch (\Throwable $th) {
@@ -131,6 +133,7 @@ class UserController extends Controller
         try {
             $data = [
                 'user_id' => $user_id,
+                'biodata' => $request['biodata'],
                 'visi' => $request['visi'],
                 'misi' => $request['misi'],
             ];

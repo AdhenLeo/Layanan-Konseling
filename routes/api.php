@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     GuruController,
     KelasController,
+    PertemuanController,
     PetaKerawananController,
     UserController,
     WaliKelasController,
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::resource('user', UserController::class);
-Route::resource('guru', GuruController::class);
-Route::resource('walas', WaliKelasController::class);
-Route::resource('petakerawanan', PetaKerawananController::class);
-Route::post('/login', [AuthController::class, 'postLogin']);
+// Route::resource('guru', GuruController::class);
+// Route::resource('walas', WaliKelasController::class);
+// Route::resource('petakerawanan', PetaKerawananController::class);
+// Route::resource('pertemuan', PertemuanController::class);
+// Route::post('/login', [AuthController::class, 'postLogin']);

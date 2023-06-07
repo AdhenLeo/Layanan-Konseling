@@ -13,7 +13,6 @@ class PetaKerawananController extends Controller
 {
     public function index()
     {
-        dd("ok");
         $datas = PetaKerawanan::paginate(4);
         return view('petakerawanan.index', compact('datas'));
     }

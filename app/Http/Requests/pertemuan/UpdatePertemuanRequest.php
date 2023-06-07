@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\user;
+namespace App\Http\Requests\pertemuan;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostUserRequest extends FormRequest
+class UpdatePertemuanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class PostUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'kelas_id' => 'required'
+            //
         ];
     }
 }

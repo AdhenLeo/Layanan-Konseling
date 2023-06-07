@@ -36,7 +36,7 @@
                             <option value='{{  $jenis_kelamin }}' {{ isset($data) ? ($data->jk == $jenis_kelamin ? "selected" : "") : '' }}>{{ $jenis_kelamin }}</option>
                             @endforeach
                         </select>
-                        <select name="role" id="" class="input-select-sm">
+                        <select name="role" id="role" class="input-select-sm">
                             <option value="" selected hidden>Pilih Role</option>
                             @foreach ($roles as $role)
                             <option value='{{  $role }}' {{ isset($data) ? ($data->role == $role ? "selected" : "") : '' }} class="capitalize">{{ $role }}</option>
@@ -63,7 +63,21 @@
             </div>
             {{-- right --}}
             <div class="sm:mt-11 mt-3 w-full">
-                <div class="">
+                <div id="form-guru" hidden>
+                    <div class="">
+                        <p class="font-semibold text-base text-non-active mb-2">Visi</p>
+                        <textarea class="input-form" name="visi" cols="40"></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-base text-non-active mb-2">Misi</p>
+                        <textarea class="input-form" name="misi" cols="40"></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-base text-non-active mb-2">Bio</p>
+                        <textarea class="input-form" name="biodata" cols="40"></textarea>
+                    </div>
+                </div>
+                <div class="mt-3">
                     <p class="font-semibold text-base text-non-active mb-2">Profile</p>
                     <div class="drag-area">
                         <div class="icon">
@@ -93,4 +107,12 @@
         new MultiSelectTag('kelas_id')  // id
     </script>
     <script src="{{ asset('assets/js/drag&drop.js') }}"></script>
+
+    <script>
+        $('#role').change(function (e) { 
+            console.log($(this).val());
+            $(this).val() == 'guru' ? $('#form-guru').removeAttr('hidden') : $('#form-guru').attr('hidden', 'true')
+            
+        });
+    </script>
 @endpush
