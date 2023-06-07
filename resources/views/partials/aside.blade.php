@@ -1,5 +1,5 @@
-<aside class="sm:block hidden w-64 shadow-sm h-screen relative z-50 bg-white">
-    <div class="flex mx-auto w-fit h-fit">
+<aside class="sm:block hidden w-64 shadow-sm h-screen fixed top-0 z-50 bg-white">
+    <div class="flex mx-auto w-fit h-fit mt-16">
         <div class="w-12 h-12 bg-primary rounded-lg">
 
         </div>

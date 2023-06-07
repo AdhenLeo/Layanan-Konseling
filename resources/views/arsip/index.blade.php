@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="my-12 mx-auto bg-white sm:w-3/4 w-4/5 rounded-2xl h-fit p-5 shadow-md">
+<div class="my-12 mx-auto bg-white sm:w-11/12 w-4/5 rounded-2xl h-fit p-5 shadow-md">
     <div class="flex justify-start">
         <p class="text-lg font-bold">Arsip</p>
     </div>

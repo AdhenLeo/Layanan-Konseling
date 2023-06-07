@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="flex my-12 mx-auto gap-5 flex-col sm:flex-row">
+<div class="flex my-12 mx-auto w-fit gap-5 flex-col sm:flex-row">
     <div class="card-sum">
         <div class="w-14 h-14 bg-secondary rounded-xl flex items-center justify-center">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

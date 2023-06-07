@@ -57,12 +57,11 @@ class UserController extends Controller
             
             $user = User::create($data);
             
-            // mengecek role
-            $request->role == 'guru' ? $this->storeGuru($request->all(), $user->id) : ($request->role == 'walas' ? $this->storeWalas($request->all(), $user->id) : null);
-
             foreach($request->kelas_id as $kelas){
                 UserKelas::create(['user_id' => $user->id, 'kelas_id' => $kelas]);
             }
+            // mengecek role
+            $request->role == 'guru' ? $this->storeGuru($request->all(), $user->id) : ($request->role == 'walas' ? $this->storeWalas($request->all(), $user->id) : null);
 
             return redirect()->route('user.index')->with('msg_success', 'Berhasil menambahkan user');
         } catch (\Throwable $th) {

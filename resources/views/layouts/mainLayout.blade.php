@@ -33,8 +33,8 @@
 
 <body class="bg-body font-nunito overflow-visible">
     @include('partials.navbar')
-    <div class="flex">
-        @include('partials.aside')
+    @include('partials.aside')
+    <div class="sm:ml-64 ml-0">
         
         @yield('modal')
         @yield('content')

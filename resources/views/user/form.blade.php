@@ -13,7 +13,7 @@
 @endpush
 
 @section('content')
-<div class="my-7 mx-auto bg-white sm:w-3/4 w-4/5 rounded-2xl item h-fit p-5 shadow-md">
+<div class="my-7 mx-auto bg-white sm:w-[94%] w-4/5 rounded-2xl item h-fit p-5 shadow-md">
     <div>
         <p class="text-lg font-bold">{{ isset($data) ? 'Edit Pengguna' : 'Tambah Pengguna' }}</p>
     </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="mt-3">
                     <p class="font-semibold text-base text-non-active mb-2">Kelas</p>
-                    <select name="kelas_id[]" id="kelas_id" class="">
+                    <select name="kelas_id[]" multiple id="kelas_id" class="">
                         @foreach ($datas as $kelas)
                         <option value='{{  $kelas->id }}' {{ isset($data) ? ($data->kelas_id == $kelas->id ? "selected" : "") : '' }}>{{ $kelas->nama }}</option>
                         @endforeach
