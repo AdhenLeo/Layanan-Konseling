@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('pertemuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('guru_id');
             $table->string('jenis');
             $table->timestamp('tgl');
             $table->string('tmpt');
+            $table->string('ket');
             $table->timestamps();
         });
     }

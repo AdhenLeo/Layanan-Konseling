@@ -30,7 +30,11 @@ class GuruController extends Controller
     {
         try {
             $data = [
-
+                'nama' => $request->nama,
+                'jk' => $request->jk,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role
             ];
 
             if($request->profile){
@@ -40,12 +44,14 @@ class GuruController extends Controller
             }
             
             $pengguna = Guru::create($data);
-            foreach ($request->kelas_id as $kelas) {
-                // PenggunaKelas::create(['kelas_id' => $kelas, 'pengguna_id' => $pengguna->id]);
-            }
+            dd("success");
+            // foreach ($request->kelas_id as $kelas) {
+            //     // PenggunaKelas::create(['kelas_id' => $kelas, 'pengguna_id' => $pengguna->id]);
+            // }
 
             return redirect()->route('guru.index')->with('msg_success', 'Berhasil menambahkan guru');
         } catch (\Throwable $th) {
+            dd("not success: ". $th);
             return redirect()->route('guru.index')->with('msg_error', 'Gagal menambahkan guru');
         }
     }

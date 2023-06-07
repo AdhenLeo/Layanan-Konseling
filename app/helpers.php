@@ -1,16 +1,18 @@
 <?php
 
 use App\Models\ {
+    Guru,
     Kelas,
     Pengguna,
     Log
 };
 use Illuminate\Support\Facades\Auth;
 
-if(function_exists('insertLog')){
-    function insertLog($id, $status){
+if(! function_exists('insertLog')){
+    function insertLog($status)
+    {
         $data = [
-            'pengguna_id' => $id,
+            'user_id' => Auth::user()->id,
             'status' => $status
         ];
 

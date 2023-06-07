@@ -28,7 +28,7 @@
             </svg>    
         </div>
         <div class="ml-4">
-            <p class="font-bold text-[20px] leading-7">{{ count($penggunas) }}</p>
+            <p class="font-bold text-[20px] leading-7">{{ count($users) }}</p>
             <p class="text-non-active text-base leading-4 font-[600]">Jumlah pengguna</p>
         </div>
     </div>

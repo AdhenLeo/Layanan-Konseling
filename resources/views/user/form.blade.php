@@ -18,7 +18,7 @@
         <p class="text-lg font-bold">{{ isset($data) ? 'Edit Pengguna' : 'Tambah Pengguna' }}</p>
     </div>
 
-    <form action="{{ isset($data) ? route('pengguna.update', $data->id) : route('pengguna.store') }}" enctype="multipart/form-data" method="POST">
+    <form action="{{ isset($data) ? route('user.update', $data->id) : route('user.store') }}" enctype="multipart/form-data" method="POST">
         @csrf
         @if (isset($data))
             @method('patch')
@@ -82,7 +82,7 @@
     
         <div class="mt-7 flex gap-4">
             <button class="btn-primary-form">{{ isset($data) ? 'Ubah' : 'Buat' }}</button>
-            <a href="{{ route('pengguna.index') }}" class="btn-back-form">Batal</a>
+            <a href="{{ route('user.index') }}" class="btn-back-form">Batal</a>
         </div>
     </form>
 </div>

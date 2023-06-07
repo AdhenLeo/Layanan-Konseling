@@ -21,20 +21,23 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         $data = User::where('email', $request->email)->first();
-
+        
         if(!$data || !Hash::check($request->password, $data->password)){
+            dd('gagal login');
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }
-
-        Auth::login($data);
-        insertLog(Auth::user()->id, 'login');
+        
+        $login = Auth::login($data);
+        // dd(Auth::user()->id);
+        insertLog('login');
+        dd("success login");
 
         return redirect()->route('dashboard')->with('msg_success', 'Berhasil melakukan login');
     }
 
     public function logout()
     {
-        insertLog(Auth::user()->id, 'logout');
+        insertLog('logout');
         Auth::logout();
 
         return redirect()->route('auth.login')->with('msg_success', 'Berhasil melakukan logout');

@@ -1,18 +1,18 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-Pengguna
+Users
 @endsection
 
 @section('sub_title')
-    Pengguna
+    Users
 @endsection
 
 @section('content')
 <div class="my-12 mx-auto bg-white sm:w-3/4 w-4/5 rounded-2xl h-fit p-5 shadow-md">
     <div class="flex justify-between">
-        <p class="text-lg font-bold">Pengguna</p>
-        <a href="{{ route('pengguna.create') }}" class="btn-primary">Tambah Pengguna</a>
+        <p class="text-lg font-bold">User</p>
+        <a href="{{ route('user.create') }}" class="btn-primary">Tambah User</a>
     </div>
     {{-- table --}}
     <div class="mt-5 overflow-auto">
@@ -31,15 +31,15 @@ Pengguna
                     <td>{{ $data->nama }}</td>
                     <td>{{ $data->email }}</td>
                     <td>
-                        @foreach ($data->kelas as $kelas)
+                        {{-- @foreach ($data->kelas as $kelas)
                             {{ $kelas->nama }},
-                        @endforeach
+                        @endforeach --}}
                     </td>
                     <td>
                         <div class="flex gap-2 items-center">
-                            <a href="{{ route('pengguna.show', $data->id) }}" class="btn-detail">Detail</a>
-                            <a href="{{ route('pengguna.edit', $data->id) }}" class="btn-warning">Edit</a>
-                            <form action="{{ route('pengguna.destroy', $data->id) }}" method="POST">
+                            <a href="{{ route('user.show', $data->id) }}" class="btn-detail">Detail</a>
+                            <a href="{{ route('user.edit', $data->id) }}" class="btn-warning">Edit</a>
+                            <form action="{{ route('user.destroy', $data->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button class="btn-danger">Hapus</button>

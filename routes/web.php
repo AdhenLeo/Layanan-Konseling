@@ -5,7 +5,7 @@ use App\Http\Controllers\{
     ArsipController,
     DashboardController,
     KelasController,
-    PenggunaController
+    UserController
 };
 use App\Http\Controllers\Auth\AuthController;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -21,7 +21,7 @@ Route::prefix('auth')->name('auth.')->group(function(){
 });
 
 Route::resource('kelas',KelasController::class);
-Route::resource('pengguna',PenggunaController::class);
+Route::resource('user',UserController::class);
 Route::resource('aktivitas',AktivitasController::class);
 Route::resource('arsip',ArsipController::class);
 

@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nip')->nullable();
-            $table->enum('jk', ['L', 'P']);
+            $table->string('nip')->unique()->nullable();
+            $table->enum('jk', ['L', 'P'])->nullable();
             $table->string('email')->unique();
             $table->string('profile')->default('/img/profile.png');
             $table->string('password');
+            $table->enum('role', ['admin', 'guru', 'walas', 'user'])->default('user');
             // $table->timestamp('email_verified_at')->nullable();
             // $table->rememberToken();
             $table->timestamps();
