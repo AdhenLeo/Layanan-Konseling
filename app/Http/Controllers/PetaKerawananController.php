@@ -31,7 +31,7 @@ class PetaKerawananController extends Controller
             ];
             
             PetaKerawanan::create($data);
-            dd($request->all());
+            // dd($request->all()); 
 
             return redirect()->route('petakerawanan.index')->with('msg_success', 'Berhasil membuat peta kerawanan');
         } catch (\Throwable $th) {

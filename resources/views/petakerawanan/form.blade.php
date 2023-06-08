@@ -21,7 +21,7 @@
         @endif
         <div class="mt-11">
             <p class="font-semibold text-base text-non-active mb-2">Jenis Peta Kerawanan</p>
-            <input type="text" value="{{ isset($data) ? $data->jenis : old('jenis')}}" class="input-form @error('jenis') input-error @enderror" name="jenis" required autocomplete="off">
+            <input type="text" value="{{ isset($data) ? $data->jenis : old('jenis')}}" class="input-form @error('jenis') input-error @enderror" name="jenis" required autocomplete="off" autofocus>
             @error('jenis')
             <small class="text-danger font-semibold">{{ $messages }}</small>
             @enderror
