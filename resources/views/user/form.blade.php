@@ -29,7 +29,7 @@
                 <div class="">
                     <p class="font-semibold text-base text-non-active mb-2">Nama</p>
                     <div class="flex sm:flex-row flex-col gap-2">
-                        <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form" name="nama" required autocomplete="off">
+                        <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form" name="nama" required autocomplete="off" autofocus>
                         <select name="jk" id="" class="input-select-sm sm:mt-0 mt-2">
                             <option value="" selected hidden>Jenis Kelamin</option>
                             @foreach ($jk as $jenis_kelamin)
