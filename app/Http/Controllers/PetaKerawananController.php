@@ -39,14 +39,15 @@ class PetaKerawananController extends Controller
         }
     }
 
-    public function show(PetaKerawanan $petaKerawanan)
-    {
-        return view('petakerawanan.show');
+    public function show($id)
+    {   
+        $data = PetaKerawanan::find($id);
+        return view('petakerawanan.show', compact('data'));
     }
 
-    public function edit(PetaKerawanan $petaKerawanan)
+    public function edit($id)
     {
-        $data = $petaKerawanan;
+        $data = PetaKerawanan::find($id);
         return view('petakerawanan.form', compact('data'));
     }
 
@@ -66,8 +67,9 @@ class PetaKerawananController extends Controller
         }
     }
 
-    public function destroy(PetaKerawanan $petaKerawanan)
+    public function destroy($id)
     {
+        $petaKerawanan = PetaKerawanan::find($id);
         if(!$petaKerawanan) return abort(404);
 
         $petaKerawanan->delete();
