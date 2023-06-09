@@ -3,22 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostPenggunaRequest;
-use App\Http\Requests\UpdatePenggunaRequest;
-use App\Models\Pengguna;
+use App\Http\Requests\user\{
+    PostUserRequest,
+    UpdateUserRequest
+};
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PenggunaApiController extends Controller
+class UserApiController extends Controller
 {
     private $response = [
         'status' => null,
-        'messages' => null,
-        'data' => null,
+        'message' => null,
+        'data' => null
     ];
 
     public function index()
     {
-        $data = Pengguna::whereNo('role', 'super admin')->get();
+        $data = User::whereNot('role', 'super admin')->get();
 
         $this->response['status'] = 200;
         $this->response['messages'] = 'success';
@@ -32,16 +34,16 @@ class PenggunaApiController extends Controller
         //
     }
 
-    public function store(PostPenggunaRequest $request)
+    public function store(PostUserRequest $request)
     {
         try {
             $data = [];
 
-            $pengguna = Pengguna::create($data);
+            $user = User::create($data);
 
             $this->response['status'] = 200;
             $this->response['messages'] = 'success';
-            $this->response['data'] = $pengguna;
+            $this->response['data'] = $user;
 
             return response()->json($this->response, 200);
         } catch (\Throwable $th) {
@@ -52,26 +54,26 @@ class PenggunaApiController extends Controller
         }
     }
 
-    public function show(Pengguna $pengguna)
+    public function show(User $user)
+    {
+        
+    }
+
+    public function edit(User $user)
     {
         //
     }
 
-    public function edit(Pengguna $pengguna)
-    {
-        //
-    }
-
-    public function update(UpdatePenggunaRequest $request, Pengguna $pengguna)
+    public function update(UpdateUserRequest $request, User $user)
     {
         try {
             $data = [];
 
-            $pengguna->update($data);
+            $user->update($data);
 
             $this->response['status'] = 200;
             $this->response['messages'] = 'success';
-            $this->response['data'] = $pengguna;
+            $this->response['data'] = $user;
 
             return response()->json($this->response, 200);
         } catch (\Throwable $th) {
@@ -82,16 +84,16 @@ class PenggunaApiController extends Controller
         }
     }
 
-    public function destroy(Pengguna $pengguna)
+    public function destroy(User $user)
     {
-        if (!$pengguna) {
+        if (!$user) {
             $this->response['messages'] = 'failed';
             $this->response['data'] = 'Not Found!';
 
             return response()->json($this->response);
         }
 
-        $pengguna->delete();
+        $user->delete();
 
         $this->response['status'] = 200;
         $this->response['messages'] = 'success';

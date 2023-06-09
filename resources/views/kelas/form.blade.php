@@ -9,7 +9,8 @@
 @endsection
 
 @section('content')
-<div class="my-12 mx-auto bg-white sm:w-3/4 w-4/5 rounded-2xl item h-fit p-5 shadow-md">
+<div class="my-12 mx-auto bg-white sm:w-11/12
+ w-4/5 rounded-2xl item h-fit p-5 shadow-md">
     <div>
         <p class="text-lg font-bold">{{ isset($data) ? 'Edit Kelas' : 'Tambah Kelas' }}</p>
     </div>
@@ -27,7 +28,7 @@
             @enderror
         </div>
     
-        <div class="mt-7 flex gap-4">
+        <div class="mt-7 flex sm:flex-row flex-row-reverse gap-4">
             <button class="btn-primary-form">{{ isset($data) ? 'Ubah' : 'Buat' }}</button>
             <a href="{{ route('kelas.index') }}" class="btn-back-form">Batal</a>
         </div>

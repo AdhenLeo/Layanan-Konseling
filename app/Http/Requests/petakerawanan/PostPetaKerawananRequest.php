@@ -27,4 +27,11 @@ class PostPetaKerawananRequest extends FormRequest
             'jenis' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'jenis.required' => "Jenis peta kerawanan tidak boleh kosong!"
+        ];
+    }
 }

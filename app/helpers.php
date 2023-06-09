@@ -20,26 +20,3 @@ if (!function_exists('insertLog')) {
         Log::create($data);
     }
 }
-
-if (!function_exists('crudLog')) {
-    function crudLog($tableName, $parameterValue)
-    {
-        $sql = <<<SQL
-            CREATE TRIGGER your_trigger_name BEFORE INSERT ON $tableName
-            FOR EACH ROW
-            BEGIN
-                -- Trigger logic here
-                -- You can use the session variable as a parameter
-                -- ...
-
-                SET @your_parameter = "$parameterValue";
-                -- Use the @your_parameter session variable in the trigger logic
-                -- ...
-            END
-        SQL;
-
-        return dd($sql);
-        DB::statement($sql);
-
-    }
-}

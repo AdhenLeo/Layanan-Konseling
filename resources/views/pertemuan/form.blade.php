@@ -77,16 +77,15 @@
                         <textarea class="input-form" name="biodata" cols="40"></textarea>
                     </div>
                 </div>
-                <div class="mt-3 ">
+                <div class="mt-3">
                     <p class="font-semibold text-base text-non-active mb-2">Profile</p>
-                    <div class="drag-area overflow-hidden">
+                    <div class="drag-area">
                         <div class="icon">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                         </div>
                         <div class="fileinfo">
                             <p></p>
                         </div>
-                        <div id="result" class="flex items-center justify-center bg-contain"></div>
                         <span class="header">Drag & Drop</span>
                         <span class="header">atau <span class="button">Cari</span></span>
                         <input type="file" name="profile" id="file-input" hidden>

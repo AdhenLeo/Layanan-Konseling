@@ -44,16 +44,21 @@ dragArea.addEventListener('drop', (event) => {
 
 function displayFile(file) {
     let fileType = file.type;
-
+    
+    imageBox = document.getElementById('result');
+    imageBox.innerHTML = '';
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
 
     if (validExtensions.includes(fileType)) {
         let fileReader = new FileReader();
-
-        fileReader.onload = () => {
-            let fileURL = fileReader.result;
-            let fileTag =  `<p>${file.name}</p>`;
-            fileInfo.insertAdjacentHTML('beforeend', fileTag);
+        fileReader.onload = (e) => {
+            // let fileURL = fileReader.result;
+            // let fileTag =  `<p>${file}</p>`;
+            // fileInfo.insertAdjacentHTML('beforeend', fileTag);
+            var productImage = new Image();
+            productImage.src = e.target.result;
+            console.log(productImage.src);
+            imageBox.appendChild(productImage);
             
         };
         fileReader.readAsDataURL(file);

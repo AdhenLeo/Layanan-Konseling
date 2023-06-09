@@ -27,15 +27,13 @@ class PertemuanController extends Controller
     {
         try {
             $data = [
-                'user_id' => $request->user_id,
-                // 'guru_id' => Auth::check() ? (Auth::user()->role == 'guru' ? Auth::user()->id : $request->guru_id) : null,
-                'guru_id' =>$request->guru_id,
+                'user_id' => Auth::check() ? (Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id) : null,
+                'guru_id' => Auth::check() ? (Auth::user()->role == 'guru' ? Auth::user()->id : $request->guru_id) : null,
                 'tema' => $request->tema,
                 'tgl' => $request->tgl,
                 'tmpt' => $request->tmpt,
                 'deskripsi' => $request->deskripsi,
-                // 'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'done' : 'waiting') : null
-                'status' => 'waiting'
+                'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'done' : 'waiting') : null
             ];
             
             

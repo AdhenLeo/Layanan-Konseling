@@ -24,7 +24,14 @@ class UpdatePetaKerawananRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'jenis' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'jenis.required' => "Jenis peta kerawanan tidak boleh kosong!"
         ];
     }
 }

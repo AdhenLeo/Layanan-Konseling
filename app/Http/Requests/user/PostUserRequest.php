@@ -24,7 +24,7 @@ class PostUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'kelas_id' => 'required'
+            
         ];
     }
 }
