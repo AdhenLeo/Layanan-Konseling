@@ -47,18 +47,22 @@ function displayFile(file) {
     
     imageBox = document.getElementById('result');
     imageBox.innerHTML = '';
-    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    // let validExtensions = ["image/jpeg", "image/jpg", "image/png"]
 
     if (validExtensions.includes(fileType)) {
         let fileReader = new FileReader();
         fileReader.onload = (e) => {
-            // let fileURL = fileReader.result;
-            // let fileTag =  `<p>${file}</p>`;
-            // fileInfo.insertAdjacentHTML('beforeend', fileTag);
-            var productImage = new Image();
-            productImage.src = e.target.result;
-            console.log(productImage.src);
-            imageBox.appendChild(productImage);
+            console.log(validExtensions)
+            if(tipe == 'file'){
+                let fileURL = fileReader.result;
+                let fileTag =  `<p>${file.name}</p>`;
+                fileInfo.insertAdjacentHTML('beforeend', fileTag);
+            }else if(tipe == 'image'){
+                var productImage = new Image();
+                productImage.src = e.target.result;
+                console.log(productImage)
+                imageBox.appendChild(productImage);
+            }
             
         };
         fileReader.readAsDataURL(file);

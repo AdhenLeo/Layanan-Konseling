@@ -31,13 +31,13 @@
                         <p class="min-w-15">Kelas</p>
                     </th>
                     <th>
-                        <p class="min-w-20">Aksi</p>
+                        <p class="min-w-10">Aksi</p>
                     </th>
                 </thead>
                 <tbody>
-                    @foreach ($datas as $data)
+                    @foreach ($datas as $i => $data)
                         <tr class="border-b border-non-active">
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $i + 1 }}</td>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->email }}</td>
                             <td>

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('guru_id')->onDelete('cascade');
             $table->string('tema');
+            $table->enum('jenis_karir', ['Bekerja', 'Kuliah', 'Wirausaha'])->nullable();
             $table->timestamp('tgl');
             $table->string('tmpt');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->enum('status', ['waiting', 'pending', 'accept', 'done']);
             $table->timestamps();
         });

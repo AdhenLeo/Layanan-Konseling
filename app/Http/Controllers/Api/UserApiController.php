@@ -14,7 +14,7 @@ class UserApiController extends Controller
 {
     private $response = [
         'status' => null,
-        'message' => null,
+        'messages' => null,
         'data' => null
     ];
 

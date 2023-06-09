@@ -12,11 +12,8 @@ use Illuminate\Support\Facades\DB;
 if (!function_exists('insertLog')) {
     function insertLog($status)
     {
-        $data = [
-            'user_id' => Auth::user()->id,
-            'status' => $status
-        ];
-
-        Log::create($data);
+        // $id = Auth::user()->id;
+        $query = "CALL insertLog(?, ?)";
+        DB::select($query, [1, $status]);
     }
 }

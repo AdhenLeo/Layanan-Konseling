@@ -25,9 +25,9 @@ class AuthController extends Controller
         if(!$data || !Hash::check($request->password, $data->password)){
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }
+
         
         $login = Auth::login($data);
-        // dd(Auth::user()->id);
         insertLog('login');
         dd("success login");
 

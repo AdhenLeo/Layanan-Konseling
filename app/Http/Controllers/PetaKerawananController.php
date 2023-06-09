@@ -6,14 +6,16 @@ use App\Http\Requests\petakerawanan\{
     PostPetaKerawananRequest,
     UpdatePetaKerawananRequest
 };
+use App\Imports\PetaKerawananImport;
 use App\Models\PetaKerawanan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PetaKerawananController extends Controller
 {
     public function index()
     {
-        $datas = PetaKerawanan::paginate(4);
+        $datas = PetaKerawanan::paginate(5);
         return view('petakerawanan.index', compact('datas'));
     }
 
@@ -75,5 +77,11 @@ class PetaKerawananController extends Controller
         $petaKerawanan->delete();
 
         return redirect()->route('petakerawanan.index')->with('msg_success', 'Berhasil menghapus peta kerawanan');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new PetaKerawananImport, $request->file);
+        return back()->with('msg_success', 'Berhasil membuat peta kerawanan');
     }
 }

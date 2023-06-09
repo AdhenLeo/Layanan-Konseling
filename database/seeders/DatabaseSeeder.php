@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $data = [
             KelasSeeder::class,
-            // UserSeeder::class
+            UserSeeder::class
         ];
 
         $this->call($data);

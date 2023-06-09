@@ -27,12 +27,7 @@ class UserSeeder extends Seeder
             'visi'=>'aaaaaa',
             'misi'=>'bbbbb',
         ];
-        $datawalas = [
-            'user_id' => $user->id,
-            'kelas_id' => 1
-        ];
 
         $user->role == 'guru' ? Guru::create($dataguru) : '';
-        $user->role == 'walas' ? WaliKelas::create($datawalas) : '';
     }
 }

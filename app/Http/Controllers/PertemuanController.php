@@ -6,7 +6,11 @@ use App\Http\Requests\pertemuan\{
     PostPertemuanRequest,
     UpdatePertemuanRequest
 };
-use App\Models\Pertemuan;
+use App\Models\{
+    Guru,
+    Pertemuan,
+    User
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,12 +19,15 @@ class PertemuanController extends Controller
     public function index()
     {
         $datas = Pertemuan::with('siswa', 'guru')->get();
-        dd($datas);
         return view('pertemuan.index');
     }
     public function create()
     {
-        return view('pertemuan.form');
+        $temas = ['Bimbingan Pribadi', 'Bimbingan Sosial', 'Bimbingan Karir', 'Bimbingan Belajar'];
+        $jeniskarirs = ['Bekerja', 'Kuliah', 'Wirausaha',];
+        $gurus = Guru::with('user')->get();
+        $siswas = User::all()->where('role', 'user');
+        return view('pertemuan.form', compact('temas','jeniskarirs', 'gurus', 'siswas'));
     }
 
     public function store(PostPertemuanRequest $request)
@@ -33,16 +40,19 @@ class PertemuanController extends Controller
                 'tgl' => $request->tgl,
                 'tmpt' => $request->tmpt,
                 'deskripsi' => $request->deskripsi,
-                'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'done' : 'waiting') : null
+                'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'accept' : 'waiting') : null
             ];
+
+            $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
             
+            dd(Auth::check());
             
             $pertemuan = Pertemuan::create($data);
-            dd($pertemuan);
+            // dd($pertemuan);
 
-            return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil menambahkan pertemuan');
+            return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil membuat pertemuan');
         } catch (\Throwable $th) {
-            return redirect()->route('pertemuan.index')->with('msg_error', 'Gagal menambahkan pertemuan');
+            return redirect()->route('pertemuan.index')->with('msg_error', 'Gagal membuat pertemuan');
         }
     }
 

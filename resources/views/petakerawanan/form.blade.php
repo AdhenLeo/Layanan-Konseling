@@ -27,7 +27,7 @@
             @enderror
         </div>
     
-        <div class="mt-7 flex gap-4">
+        <div class="mt-7 flex sm:flex-row flex-row-reverse gap-4">
             <button class="btn-primary-form">{{ isset($data) ? 'Ubah' : 'Buat' }}</button>
             <a href="{{ route('petakerawanan.index') }}" class="btn-back-form">Batal</a>
         </div>

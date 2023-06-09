@@ -107,6 +107,10 @@
     <script>
         new MultiSelectTag('kelas_id')  // id
     </script>
+    <script>
+        var validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+        var tipe = 'image';
+    </script>
     <script src="{{ asset('assets/js/drag&drop.js') }}"></script>
 
     <script>

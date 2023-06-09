@@ -27,7 +27,7 @@ class KelasController extends Controller
                 'nama' => $request->nama
             ];
 
-            Kelas::create($data);
+            $kelas = Kelas::create($data);
 
             return redirect()->route('kelas.index')->with('msg_success', 'Berhasil menambahkan kelas');
         } catch (\Throwable $th) {

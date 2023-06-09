@@ -23,7 +23,7 @@ class AuthApiController extends Controller
 
             if (!$data || !Hash::check($request->password, $data->password)) {
                 $this->response['status'] = 404;
-                $this->response['message'] = 'failed';
+                $this->response['messages'] = 'failed';
                 $this->response['data'] = 'Email atau password salah!';
 
                 return response()->json($this->response);
@@ -35,10 +35,11 @@ class AuthApiController extends Controller
 
             $this->response['status'] = 200;
             $this->response['messages'] = 'success';
-            $this->response['data'] = ['user' => $data,'profile' => $imagepath,'token' => $token];
+            $this->response['data'] = ['user' => $data,'token' => $token];
 
             return response()->json($this->response);
         } catch (\Throwable $th) {
+            $this->response['status'] = 404;
             $this->response['messages'] = 'failed';
             $this->response['data'] = $th;
 
@@ -50,8 +51,8 @@ class AuthApiController extends Controller
     {
         $logout = auth()->user()->currentAccessToken()->delete();
 
-        $this->response['status'] = true;
-        $this->response['message'] = 'success';
+        $this->response['status'] = 200;
+        $this->response['messages'] = 'success';
 
         return response()->json($this->response, 200);
     }
