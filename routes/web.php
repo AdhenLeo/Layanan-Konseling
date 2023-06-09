@@ -6,9 +6,11 @@ use App\Http\Controllers\{
     DashboardController,
     KelasController,
     PertemuanController,
+    PetaKerawananController,
     UserController
 };
 use App\Http\Controllers\Auth\AuthController;
+use App\Models\PetaKerawanan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,7 @@ Route::resource('user',UserController::class);
 Route::resource('aktivitas',AktivitasController::class);
 Route::resource('arsip',ArsipController::class);
 Route::resource('pertemuan',PertemuanController::class);
+Route::resource('petakerawanan',PetaKerawananController::class);
 
 Route::get('/generatepdf', function(){
     $pdf = Pdf::loadView('pdf.index');

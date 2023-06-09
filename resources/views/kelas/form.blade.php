@@ -22,7 +22,7 @@
         @endif
         <div class="mt-11">
             <p class="font-semibold text-base text-non-active mb-2">Nama Kelas</p>
-            <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form @error('nama') input-error @enderror" name="nama" required autocomplete="off">
+            <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form @error('nama') input-error @enderror" name="nama" required autocomplete="off" autofocus>
             @error('nama')
             <small class="text-danger font-semibold">{{ $messages }}</small>
             @enderror
