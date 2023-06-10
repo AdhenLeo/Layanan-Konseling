@@ -24,6 +24,6 @@ use Illuminate\Support\Facades\Route;
 // Route::resource('guru', GuruController::class);
 // Route::resource('walas', WaliKelasController::class);
 // Route::resource('petakerawanan', PetaKerawananController::class);
-Route::resource('pertemuan', PertemuanController::class);
+// Route::resource('pertemuan', PertemuanController::class);    
 // Route::resource('userapi', UserApiController::class);
 Route::post('/login', [AuthController::class, 'postLogin']);
