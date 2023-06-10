@@ -14,6 +14,10 @@ use App\Models\PetaKerawanan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function(){
+    return view('landing_page');
+});
+
 Route::controller(DashboardController::class)->group(function(){
     Route::get('/dashboard', 'index')->name('dashboard');
 });
@@ -28,7 +32,7 @@ Route::resource('user',UserController::class);
 Route::resource('aktivitas',AktivitasController::class);
 Route::resource('arsip',ArsipController::class);
 Route::resource('pertemuan',PertemuanController::class);
-Route::resource('petakerawanan',PetaKerawananController::class);
+Route::resource('petakerawanan',PetaKerawananController::class); //
 
 Route::get('/generatepdf', function(){
     $pdf = Pdf::loadView('pdf.index');

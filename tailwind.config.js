@@ -7,8 +7,16 @@ module.exports = {
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
   ],
   theme: {
-    colors: {
+
+    extend: {
+          colors: {
       'primary': '#3661ED',
+      'primary-landing': '#4267AD',
+      'gray-landing': '#C8C8C8',
+      'grey-landing': '#D9D9D9',
+      'dark-grey-landing': '#6D6D6D',
+      'grey-txt': '#C8C8C8',
+      'yellow-landing': '#FFC554',
       'secondary': '#EBF0FE',
       'dark-primary': '#1B253B',
       'dark-secondary': '#232D45',
@@ -35,8 +43,9 @@ module.exports = {
     },
     boxShadow: {
       'card': '0px 0px 2px rgba(0, 0, 0, 0.25)',
+      'card_lp': '0px 4px 16px rgba(0, 0, 0, 0.12)',
     },
-    extend: {},
+    },
   },
   plugins: [],
 }
