@@ -46,8 +46,8 @@
     .input-select-sm{
         @apply border rounded-lg p-3 border-non-active focus:outline-primary sm:w-1/2 w-full 
     }
-    .badge-pending{
-        @apply text-[13px] font-bold px-3 py-1 rounded-xl bg-secondary
+    .badge-primary{
+        @apply text-[13px] font-bold px-5 text-center py-1 rounded-xl bg-secondary
     }
     .badge-danger{
         @apply text-[13px] font-bold px-3 py-1 rounded-xl bg-danger-secondary

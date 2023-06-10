@@ -24,7 +24,18 @@ class PostPertemuanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'tema' => 'required',
+            'tgl' => 'required',
+            'tmpt' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'tema.required' => 'Tema pertemuan tidak boleh kosong!',
+            'tgl.required' => 'Tanggal pertemuan tidak boleh kosong!',
+            'tmpt.required' => 'Tempat pertemuan tidak boleh kosong!',
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\guru\PostGuruRequest;
 use App\Http\Requests\user\{
     PostUserRequest,
     UpdateUserRequest
@@ -33,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
         $jk = ['L','P'];
-        $roles = ['admin','guru','walas', 'user'];
+        $roles = ['guru','walas', 'user'];
         $datas = Kelas::all();
         return view('user.form', compact('datas', 'jk', 'roles'));
     }
@@ -53,7 +52,10 @@ class UserController extends Controller
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
+            }else{
+                $data['profile'] = 'assets/img/profile.png';
             }
+
             
             $user = User::create($data);
             
@@ -77,7 +79,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $jk = ['L','P'];
-        $roles = ['admin','guru','walas', 'user'];
+        $roles = ['guru','walas', 'user'];
         $datas = Kelas::all();
         $data = $user;
         return view('user.form', compact('data','datas','jk','roles'));
@@ -86,7 +88,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         try {
-            // $kelas = PenggunaKelas::where('user_id', $user->id)->get();
             $data = [
                 'nama' => $request->nama,
                 'jk' => $request->jk,
@@ -106,10 +107,7 @@ class UserController extends Controller
             }
             $user->update($data);
 
-            $request->role == 'guru' ? $this->updateGuru($request->all(), $user->id) : ($request->role == 'walas' ? $this->updateWalas($request->all(), $user->id) : null);
-            // foreach ($request->kelas_id as $kelas) {
-            //     $kelas->update(['kelas_id' => $kelas]);
-            // }
+            $request->role == 'guru' ? $this->updateGuru($request->all(), $user->id) : null;
 
             return redirect()->route('user.index')->with('msg_success', 'Berhasil mengubah user');
         } catch (\Throwable $th) {
@@ -138,15 +136,9 @@ class UserController extends Controller
             ];
 
             $guru = Guru::create($data);
-            dd("success");
-            // foreach ($request->kelas_id as $kelas) {
-            //     // PenggunaKelas::create(['kelas_id' => $kelas, 'pengguna_id' => $pengguna->id]);
-            // }
 
-            return redirect()->route('guru.index')->with('msg_success', 'Berhasil menambahkan guru');
         } catch (\Throwable $th) {
-            dd("not success: ". $th);
-            return redirect()->route('guru.index')->with('msg_error', 'Gagal menambahkan guru');
+            return redirect()->route('user.index')->with('msg_error', 'Gagal mengubah user');
         }
     }
 
@@ -156,58 +148,16 @@ class UserController extends Controller
             $guru = Guru::where('user_id', $user_id)->first();
             $data = [
                 'user_id' => $user_id,
+                'biodata' => $request['biodata'],
                 'visi' => $request['visi'],
                 'misi' => $request['misi'],
             ];
             
             $guru->update($data);
-            // dd($guru);
-            dd("success");
-            // foreach ($request->kelas_id as $kelas) {
-            //     // PenggunaKelas::create(['kelas_id' => $kelas, 'pengguna_id' => $pengguna->id]);
-            // }
 
-            return redirect()->route('guru.index')->with('msg_success', 'Berhasil menambahkan guru');
         } catch (\Throwable $th) {
             dd("not success: ". $th);
             return redirect()->route('guru.index')->with('msg_error', 'Gagal menambahkan guru');
-        }
-    }
-
-    public function storeWalas($request, $user_id)
-    {
-        try {
-            $data = [
-                'user_id' =>$user_id,
-                'kelas_id' =>$request['kelas_id']
-            ];
-
-            $walas = WaliKelas::create($data);
-            dd('success: '. $walas);
-
-            return redirect()->route('walas.index')->with('msg_success', 'Berhasil menambahkan wali kelas');
-        } catch (\Throwable $th) {
-            return redirect()->route('walas.index')->with('msg_error', 'Gagal menambahkan wali kelas');
-        }
-    }
-
-    public function updateWalas($request, $user_id)
-    {
-        try {
-            $walas = WaliKelas::where('user_id', $user_id)->first();
-            $data = [
-                'user_id' =>$user_id,
-            ];
-
-            isset($request['kelas_id']) ? $data['kelas_id'] = $request['kelas_id'] : '';
-
-            $walas->update($data);
-            dd('success: '. $walas);
-            
-            return redirect()->route('walas.index')->with('msg_success', 'Berhasil menambahkan wali kelas');
-        } catch (\Throwable $th) {
-            dd($th);
-            return redirect()->route('walas.index')->with('msg_error', 'Gagal menambahkan wali kelas');
         }
     }
 }

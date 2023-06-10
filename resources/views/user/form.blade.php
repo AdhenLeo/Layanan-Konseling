@@ -29,7 +29,7 @@
                 <div class="">
                     <p class="font-semibold text-base text-non-active mb-2">Nama</p>
                     <div class="flex sm:flex-row flex-col gap-2">
-                        <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form" name="nama" required autocomplete="off">
+                        <input type="text" value="{{ isset($data) ? $data->nama : old('nama')}}" class="input-form" name="nama" required autocomplete="off" autofocus>
                         <select name="jk" id="" class="input-select-sm sm:mt-0 mt-2">
                             <option value="" selected hidden>Jenis Kelamin</option>
                             @foreach ($jk as $jenis_kelamin)
@@ -77,15 +77,16 @@
                         <textarea class="input-form" name="biodata" cols="40"></textarea>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3 ">
                     <p class="font-semibold text-base text-non-active mb-2">Profile</p>
-                    <div class="drag-area">
+                    <div class="drag-area overflow-hidden">
                         <div class="icon">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                         </div>
                         <div class="fileinfo">
                             <p></p>
                         </div>
+                        <div id="result" class="flex items-center justify-center bg-contain"></div>
                         <span class="header">Drag & Drop</span>
                         <span class="header">atau <span class="button">Cari</span></span>
                         <input type="file" name="profile" id="file-input" hidden>
@@ -94,7 +95,7 @@
             </div>
         </div>
     
-        <div class="mt-7 flex gap-4">
+        <div class="mt-7 sm:flex-row flex flex-row-reverse gap-4">
             <button class="btn-primary-form">{{ isset($data) ? 'Ubah' : 'Buat' }}</button>
             <a href="{{ route('user.index') }}" class="btn-back-form">Batal</a>
         </div>
@@ -105,6 +106,10 @@
 @push('js')
     <script>
         new MultiSelectTag('kelas_id')  // id
+    </script>
+    <script>
+        var validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+        var tipe = 'image';
     </script>
     <script src="{{ asset('assets/js/drag&drop.js') }}"></script>
 
