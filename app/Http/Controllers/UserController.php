@@ -48,7 +48,7 @@ class UserController extends Controller
                 'role' => $request->role
             ];
 
-            
+
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
@@ -56,9 +56,9 @@ class UserController extends Controller
                 $data['profile'] = 'assets/img/profile.png';
             }
 
-            
+
             $user = User::create($data);
-            
+
             foreach($request->kelas_id as $kelas){
                 UserKelas::create(['user_id' => $user->id, 'kelas_id' => $kelas]);
             }
@@ -71,9 +71,9 @@ class UserController extends Controller
         }
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        return view('user.show');
+        return view('profile.form');
     }
 
     public function edit(User $user)
@@ -94,14 +94,14 @@ class UserController extends Controller
                 'email' => $request->email,
                 'role' => $request->role
             ];
-            
+
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
             }
-            
+
             $request->password ? $data['password'] = Hash::make($request->password) : '';
-            
+
             if(Storage::disk('public')->exists("$user->profile")){
                 Storage::disk('public')->delete("$user->profile");
             }
@@ -152,7 +152,7 @@ class UserController extends Controller
                 'visi' => $request['visi'],
                 'misi' => $request['misi'],
             ];
-            
+
             $guru->update($data);
 
         } catch (\Throwable $th) {
