@@ -13,6 +13,10 @@ use App\Http\Controllers\Auth\AuthController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function(){
+    return view('landing_page');
+});
+
 Route::controller(DashboardController::class)->group(function(){
     Route::get('/dashboard', 'index')->name('dashboard');
 });
