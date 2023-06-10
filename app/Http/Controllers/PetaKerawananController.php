@@ -81,7 +81,11 @@ class PetaKerawananController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new PetaKerawananImport, $request->file);
-        return back()->with('msg_success', 'Berhasil membuat peta kerawanan');
+        try {
+            Excel::import(new PetaKerawananImport, $request->file);
+            return back()->with('msg_success', 'Berhasil membuat peta kerawanan');
+        } catch (\Throwable $th) {
+            return back()->with('msg_error', 'Gagal membuat peta kerawanan');
+        }
     }
 }

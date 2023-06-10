@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PetaKerawanan extends Model
+class UserPetaKerawanan extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
     public function user(){
-        return $this->belongsToMany(User::class, UserPetaKerawanan::class);
+        return $this->belongsTo(User::class);
     }
+
+    public function petakerawanan(){
+        return $this->belongsTo(PetaKerawanan::class);
+    }
+
 }

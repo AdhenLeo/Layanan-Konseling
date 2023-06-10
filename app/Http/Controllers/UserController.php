@@ -52,8 +52,6 @@ class UserController extends Controller
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
-            }else{
-                $data['profile'] = 'assets/img/profile.png';
             }
 
             

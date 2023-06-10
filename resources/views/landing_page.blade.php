@@ -101,7 +101,7 @@
         <a href="">Podcast</a>
         <a href="">About Us</a>
       </div>
-      <a class="px-14 rounded-lg py-2 bg-yellow-landing text-white ">Login</a>
+      <a href="" class="px-14 rounded-lg py-2 bg-yellow-landing text-white ">Login</a>
     </div>
     <div id="mobile_bar" class="active flex flex-col h-0 overflow-hidden justify-between font-semibold text-primary">
       <a href="" class="p-2">How to Konsul</a>

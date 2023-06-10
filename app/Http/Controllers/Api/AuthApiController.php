@@ -20,7 +20,7 @@ class AuthApiController extends Controller
     {
         try {
             $data = User::where('email', $request->email)->first();
-
+            
             if (!$data || !Hash::check($request->password, $data->password)) {
                 $this->response['status'] = 404;
                 $this->response['messages'] = 'failed';
@@ -28,10 +28,11 @@ class AuthApiController extends Controller
 
                 return response()->json($this->response);
             }
-
+            
             $token = $data->createToken($request->device_name)->plainTextToken;
+            insertLog('login');
 
-            $imagepath = Storage::disk('public')->exists($data->profile) ? Storage::disk('public')->url($data->profile) : asset($data->profile);
+            $data->profile = Storage::disk('public')->exists($data->profile) ? Storage::disk('public')->url($data->profile) : asset($data->profile);
 
             $this->response['status'] = 200;
             $this->response['messages'] = 'success';

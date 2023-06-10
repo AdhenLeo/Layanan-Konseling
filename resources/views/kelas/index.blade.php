@@ -37,7 +37,7 @@
                 <tbody>
                     @foreach ($datas as $i => $data)
                         <tr class="border-b border-non-active">
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{ $i + $datas->firstItem() }}</td>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->created_at->diffForHumans() }}</td>
                             <td>{{ $data->updated_at->diffForHumans() }}</td>

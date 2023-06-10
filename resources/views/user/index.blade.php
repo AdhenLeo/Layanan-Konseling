@@ -37,13 +37,15 @@
                 <tbody>
                     @foreach ($datas as $i => $data)
                         <tr class="border-b border-non-active">
-                            <td>{{ $i + 1 }}</td>
+                            <td>{{ $i + $datas->firstItem() }}</td>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->email }}</td>
                             <td>
+                                <div class="grid grid-cols-3 gap-2">
                                 @foreach ($data->kelas as $kelas)
-                                    {{ $kelas->nama }}
+                                    <p class="tag">{{ $kelas->nama }}</p>
                                 @endforeach
+                                </div>
                             </td>
                             <td>
                                 <div class="flex gap-2 items-center">

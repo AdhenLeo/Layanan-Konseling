@@ -29,7 +29,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><p class="mx-auto badge-success">Selesai</p></td>
+                    <td><p class="badge-success w-fit">Selesai</p></td>
                 </tr>
             </tbody>
         </table>

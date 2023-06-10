@@ -7,7 +7,7 @@
         </svg>
     </div>
     <div class="flex items-center cursor-pointer" id="dropdown">
-        <img src="{{ isset(Auth::user()->profile) ? asset('storage'.Auth::user()->profile) : asset('img/profile.png') }}" alt="" class="w-11">
+        <img src="{{ Auth::check() && isset(Auth::user()->profile) ? (Auth::user()->profile != 'img/profile.png' ? asset('storage'.Auth::user()->profile) : asset('img/profile.png')) : asset('img/profile.png') }}" alt="" class="w-11">
         <div class="ml-2">
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.8201 8.37277L10.6402 13.5527L5.46033 8.37277" stroke="black" stroke-width="2"

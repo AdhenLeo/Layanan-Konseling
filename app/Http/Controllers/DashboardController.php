@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{
     Kelas,
+    Log,
     User
 };
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class DashboardController extends Controller
     {
         $kelas = Kelas::all();
         $users = User::all();
-        return view('dashboard', compact('kelas', 'users'));
+        $logs = Log::with('user')->paginate(5);
+        return view('dashboard', compact('kelas', 'users', 'logs'));
     }
 }

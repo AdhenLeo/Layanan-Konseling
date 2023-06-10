@@ -37,4 +37,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Log::class);
     }
+
+    public function petakerawanan(){
+        return $this->belongsToMany(PetaKerawanan::class, UserPetaKerawanan::class);
+    }
 }

@@ -14,6 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
+        $query = 'DROP PROCEDURE IF EXISTS insertLog';
+        DB::unprepared($query);
+
         $query = <<<EOT
         CREATE PROCEDURE insertLog(IN user_id INT, IN status varchar(20))
         BEGIN
@@ -31,7 +34,7 @@ return new class extends Migration
      */
     public function down()
     {
-        $query = 'DROP PROCEDURE IF EXISTS insertLog';
+        $query = 'DROP PROCEDURE insertLog';
         DB::unprepared($query);
     }
 };

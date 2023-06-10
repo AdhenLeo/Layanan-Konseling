@@ -51,19 +51,6 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('aktivitas.index') }}">
-                    <div class="{{ Request::is('aktivitas*') ? 'icon-active' : '' }}">
-                        <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M4.375 29.1667V20.4167L16.0417 17.5L4.375 14.5833V5.83333L25.2292 14.5833H24.7917C21.9479 14.5833 19.5353 15.5862 17.554 17.5919C15.5726 19.5976 14.5824 22.0218 14.5833 24.8646L4.375 29.1667ZM24.7917 32.0833C22.7743 32.0833 21.0544 31.3721 19.6321 29.9498C18.2097 28.5274 17.499 26.8081 17.5 24.7917C17.5 22.7743 18.2112 21.0544 19.6335 19.6321C21.0559 18.2097 22.7753 17.499 24.7917 17.5C26.809 17.5 28.5289 18.2112 29.9513 19.6335C31.3736 21.0559 32.0843 22.7753 32.0833 24.7917C32.0833 26.809 31.3722 28.5289 29.9498 29.9512C28.5274 31.3736 26.8081 32.0843 24.7917 32.0833ZM27.1979 28.2187L28.2188 27.1979L25.5208 24.5V20.4167H24.0625V25.0833L27.1979 28.2187Z"
-                                fill="{{ Request::is('aktivitas*') ? 'white' : '#C0C0C0' }}" />
-                        </svg>
-                    </div>
-                    <p class="ml-3 {{ Request::is('aktivitas*') ? 'text-primary' : '' }}">Aktivitas</p>
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('arsip.index') }}">
                     <div class="{{ Request::is('arsip*') ? 'icon-active' : '' }}">
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none"
@@ -113,7 +100,7 @@
     <div>
         <div class="">
             <ul>
-                <li>
+                <li class="">
                     <a href="{{ route('dashboard') }}" class="{{ Request::is('dashboard*') ? 'icon-active-responsive' : 'px-2' }}">
                         <div class="">
                             <svg width="25" height="25" viewBox="0 0 70 70" fill="none"
@@ -149,20 +136,7 @@
                                     fill="{{ Request::is('user*') ? 'white' : '#C0C0C0' }}" />
                             </svg>
                         </div>
-                        <p class="ml-3 text-base {{ Request::is('user*') ? 'text-white' : '' }}">Pengguna</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('aktivitas.index') }}" class="{{ Request::is('aktivitas*') ? 'icon-active-responsive' : 'px-2' }}">
-                        <div>
-                            <svg width="25" height="25" viewBox="0 0 35 35" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.375 29.1667V20.4167L16.0417 17.5L4.375 14.5833V5.83333L25.2292 14.5833H24.7917C21.9479 14.5833 19.5353 15.5862 17.554 17.5919C15.5726 19.5976 14.5824 22.0218 14.5833 24.8646L4.375 29.1667ZM24.7917 32.0833C22.7743 32.0833 21.0544 31.3721 19.6321 29.9498C18.2097 28.5274 17.499 26.8081 17.5 24.7917C17.5 22.7743 18.2112 21.0544 19.6335 19.6321C21.0559 18.2097 22.7753 17.499 24.7917 17.5C26.809 17.5 28.5289 18.2112 29.9513 19.6335C31.3736 21.0559 32.0843 22.7753 32.0833 24.7917C32.0833 26.809 31.3722 28.5289 29.9498 29.9512C28.5274 31.3736 26.8081 32.0843 24.7917 32.0833ZM27.1979 28.2187L28.2188 27.1979L25.5208 24.5V20.4167H24.0625V25.0833L27.1979 28.2187Z"
-                                    fill="{{ Request::is('aktivitas*') ? 'white' : '#C0C0C0' }}" />
-                            </svg>
-                        </div>
-                        <p class="ml-3 text-base {{ Request::is('aktivitas*') ? 'text-white' : '' }}">Aktivitas</p>
+                        <p class="ml-3 text-base {{ Request::is('user*') ? 'text-white' : '' }}">Users</p>
                     </a>
                 </li>
                 <li>

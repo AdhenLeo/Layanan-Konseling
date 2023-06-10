@@ -1,20 +1,5 @@
-@extends('layouts.mainLayout')
-
-@section('title')
-    Aktivitas
-@endsection
-
-@section('sub_title')
-    Aktivitas
-@endsection
-
-@section('modal')
-@include('partials.modals.modalacc')
-@include('partials.modals.modalreject')
-@endsection
-
-@section('content')
-<div class="w-fit mx-auto">
+{{-- aktifitas --}}
+<div class="mx-auto sm:w-11/12 w-[94%]">
     {{-- sum --}}
     <div class="flex mt-12 gap-5 flex-col sm:flex-row">
         <div class="card-sum">
@@ -59,7 +44,7 @@
         {{-- table --}}
         <div class="mt-12 mx-auto border-t border-non-active p-5">
             {{-- card --}}
-            <div class="flex mb-5 rounded-xl py-4 px-5 w-full sm:flex-row flex-col overflow-auto shadow-card justify-between items-center">
+            <a href="" class=" hover:bg-non-active hover:bg-opacity-10 flex mb-5 rounded-xl py-4 px-5 w-full sm:flex-row flex-col overflow-auto shadow-card justify-between items-center">
                 {{-- left --}}
                 <div class="flex sm:flex-row flex-col items-center gap-7">
                     <div class="rounded-full bg-non-active p-3">
@@ -82,11 +67,10 @@
                 <div class="flex gap-4 sm:mt-0 mt-5">
                     <p class="badge-primary">Waiting</p>
                 </div>
-            </div>
+            </a>
         </div>
         {{-- pagination --}}
         <div class="mt-5">
         </div>
     </div>
 </div>
-@endsection

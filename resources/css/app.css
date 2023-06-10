@@ -11,7 +11,7 @@
         @apply bg-primary items-center w-full flex px-2 py-3
     }
     .card-sum {
-        @apply sm:w-[24vw] w-[93vw] h-24 bg-white rounded-2xl px-5 flex items-center
+        @apply sm:w-[24vw] w-full h-24 bg-white rounded-2xl px-5 flex items-center
     }
     .btn-primary{
         @apply px-4 py-3 text-base text-white bg-primary opacity-90 transition-colors hover:opacity-100 rounded-xl font-semibold
@@ -50,7 +50,7 @@
         @apply text-[13px] font-bold px-5 text-center py-1 rounded-xl bg-secondary
     }
     .badge-danger{
-        @apply text-[13px] font-bold px-3 py-1 rounded-xl bg-danger-secondary
+        @apply text-[13px] font-bold px-3 text-center py-1 rounded-xl bg-danger-secondary
     }
     .badge-success{
         @apply text-[13px] font-bold px-3 text-center py-1 rounded-xl bg-success-secondary
@@ -63,6 +63,9 @@
     }
     .radio-non-active{
         @apply bg-white hover:bg-secondary shadow-card cursor-pointer font-semibold text-base flex items-center rounded-xl w-full p-3
+    }
+    .tag {
+        @apply px-3 text-center py-1 rounded-lg bg-secondary text-[12px] font-semibold
     }
 }
 
