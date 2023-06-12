@@ -25,11 +25,15 @@ class AuthController extends Controller
         if(!$data || !Hash::check($request->password, $data->password)){
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }
-
         
+        // if($request->remember == 'on'){
+        //     $response = response('cookie');
+        //     $response->withCookie('email_nisn_nip', $request->email, 1);
+        //     $response->withCookie('password', $request->password, 1);
+        // }
+
         $login = Auth::login($data);
         insertLog('login');
-        dd("success login");
 
         return redirect()->route('dashboard')->with('msg_success', 'Berhasil melakukan login');
     }

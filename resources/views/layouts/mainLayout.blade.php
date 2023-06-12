@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
         integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('assets/js/iziAlert.js') }}"></script>
     {{-- multiple select --}}
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
@@ -27,6 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @vite('resources/css/app.css')
 
     {{-- link icon --}}
@@ -47,15 +47,15 @@
 
     @if (Session::has('msg_error'))
         <script>
-            showAlert("{{ Session::get('msg_error') }}", 'error')
+            Component.showAlert("{{ Session::get('msg_error') }}", 'error')
         </script>
     @elseif(Session::has('msg_success'))
         <script>
-            showAlert("{{ Session::get('msg_success') }}", 'success')
+            Component.showAlert("{{ Session::get('msg_success') }}", 'success')
         </script>
     @elseif(Session::has('msg_info'))
         <script>
-            showAlert("{{ Session::get('msg_info') }}", 'info')
+            Component.showAlert("{{ Session::get('msg_info') }}", 'info')
         </script>
     @endif
 

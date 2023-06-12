@@ -7,7 +7,7 @@
         </svg>
     </div>
     <div class="flex items-center cursor-pointer" id="dropdown">
-        <img src="{{ Auth::check() && isset(Auth::user()->profile) ? (Auth::user()->profile != 'img/profile.png' ? asset('storage'.Auth::user()->profile) : asset('img/profile.png')) : asset('img/profile.png') }}" alt="" class="w-11">
+        <img src="{{ Auth::user()->profile != 'img/profile.png' ? asset('storage'.Auth::user()->profile) : asset(Auth::user()->profile) }}" alt="" class="w-11">
         <div class="ml-2">
             <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.8201 8.37277L10.6402 13.5527L5.46033 8.37277" stroke="black" stroke-width="2"
@@ -17,6 +17,13 @@
 
     </div>
 </nav>
-<div class="hidden absolute right-5 top-14 shadow-lg rounded-lg w-44 z-10 h-20 bg-white" id="dropdown-card">
-
+<div class="hidden absolute flex flex-col gap-2 right-5 top-16 shadow-card rounded-lg w-48 z-10 p-3 bg-white" id="dropdown-card">
+    <a href="{{ route('profile.index') }}">
+        <p class="p-2 flex items-center gap-2 rounded-lg transition-colors hover:bg-primary hover:text-white"><span class="material-symbols-outlined">account_circle</span>Profile</p>
+    </a>
+    <div class="border-b border-non-active"></div>
+    <form action="{{ route('auth.post.logout') }}" method="post">
+        @csrf
+        <button class="p-2 flex items-center gap-2 rounded-lg transition-colors hover:bg-primary hover:text-white w-full text-left"><span class="material-symbols-outlined">logout</span>Logout</button>
+    </form>
 </div>

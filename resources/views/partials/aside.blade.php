@@ -4,7 +4,7 @@
 
         </div>
         <div class="ml-4">
-            <p class="font-bold text-[20px] leading-7">Ayo Konsul</p>
+            <p class="font-bold text-[20px] leading-7 text-primary">Deep<span class="text-yellow-landing">Talk</span></p>
             <p class="text-non-active text-base leading-4">@yield('sub_title')</p>
         </div>
     </div>

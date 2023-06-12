@@ -15,7 +15,7 @@ class UserPetaKerawanan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function petakerawanan(){
+    public function peta_kerawanan(){
         return $this->belongsTo(PetaKerawanan::class);
     }
 

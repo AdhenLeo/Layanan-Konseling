@@ -75,7 +75,7 @@
       <span class="hidden sm:hidden md:hidden lg:hidden xl:inline">xl</span>
     </p>
   </div> --}}
-  <nav class="px-3 lg:px-14 py-5 ">
+  <nav class="px-3 lg:px-14 py-5">
     <div class="flex justify-between items-center">
       <div class="sm:hidden block cursor-pointer" onclick="
           if(mobile_bar.classList.contains('active')){
@@ -101,7 +101,12 @@
         <a href="">Podcast</a>
         <a href="">About Us</a>
       </div>
-      <a href="" class="px-14 rounded-lg py-2 bg-yellow-landing text-white ">Login</a>
+      @if (Auth::check())
+      <a href="{{ route('dashboard') }}" class="px-14 rounded-lg py-2 bg-yellow-landing text-white ">Dashboard</a>
+      @else
+      <a href="{{ route('auth.login') }}" class="px-14 rounded-lg py-2 bg-yellow-landing text-white ">Login</a>
+      @endif
+
     </div>
     <div id="mobile_bar" class="active flex flex-col h-0 overflow-hidden justify-between font-semibold text-primary">
       <a href="" class="p-2">How to Konsul</a>

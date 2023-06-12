@@ -71,7 +71,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        return view('profile.form');
+        
     }
 
     public function edit(User $user)
@@ -88,10 +88,12 @@ class UserController extends Controller
         try {
             $data = [
                 'nama' => $request->nama,
-                'jk' => $request->jk,
                 'email' => $request->email,
-                'role' => $request->role
             ];
+
+            $request->role ? $data['role'] = $request->role : null;
+            
+            $request->jk ? $data['jk'] = $request->jk : null;
 
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);

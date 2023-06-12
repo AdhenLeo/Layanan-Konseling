@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('tgl');
             $table->string('tmpt');
             $table->string('deskripsi')->nullable();
+            $table->string('kesimpulan')->nullable();
             $table->enum('status', ['waiting', 'pending', 'accept', 'done']);
             $table->timestamps();
         });

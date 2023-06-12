@@ -1,34 +1,40 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Kelas
+    Profile
 @endsection
 
 @section('sub_title')
-    Kelas
+    Profile
 @endsection
 
 @section('content')
-<div class="mt-12 rounded-[12px] w-11/12 h-[350px] mx-auto bg-white ">
-    <p class="font-semibold text-xl p-10">Profile</p>
-    <div class="w-[97%] mx-auto border-t border-non-active flex">
-        <div class="w-3/6 flex">
-            <div class="w-24 h-24 mt-8 ml-4 bg-non-active rounded-full">
+<div class="my-12 mx-auto bg-white sm:w-11/12 w-4/5 rounded-2xl h-fit p-7 shadow-md">
+    <div class="flex justify-start">
+        <p class="text-lg font-bold ">Profile</p>
+    </div>
+    <div class="flex sm:flex-row flex-col justify-between mt-7 px-3 py-8 border-t-2 border-non-active">
+        {{-- left --}}
+        <div class="flex gap-14 items-center sm:flex-row flex-col">
+            <div class="w-[100px] h-[100px] bg-non-active rounded-full">
+
             </div>
-            <div class="w-36 mt-8 ml-16 text-left">
-                <p class="px-1 font-bold text-xl">Nama Admin</p>
-                <p class="px-1 font-normal text-non-active">Super Admin</p>
-                <p class="py-2 w-28 bg-primary text-xs text-center text-white rounded-md">Edit Profile</p>
+            <div class="flex sm:items-start items-center flex-col gap-3">
+                <p class="text-[20px] font-bold leading-5">{{ Auth::user()->nama }}</p>
+                <p class="text-base font-semibold leading-3 text-non-active">{{ Auth::user()->role }}</p>
+                <a href="{{ route('profile.edit', 1) }}" class="btn-primary-form">Edit Profile</a>
             </div>
         </div>
-        <div class=" w-3/6 h-40 border-l border-non-active mt-9 mr-16">
-            <div class="ml-10 px-5">
-                <p class="text-non-active">Contact Details</p>
-                <div class="flex space-x mt-2">
-                    <span class="material-symbols-outlined text-non-active">mail</span>
-                    <p class="text-non-active ml-2">email@gmail.com</p>
-                </div>
+        <div class="sm:border-l border-l-0 border-non-active px-9 py-3 sm:items-start items-center flex flex-col gap-4">
+            <p class="text-non-active font-semibold text-[13px] leading-3">Contact Details</p>
+            
+            <div class="flex gap-2 items-center">
+                <span class="material-symbols-outlined text-non-active">mail</span>
+                <p class="text-[13px] text-non-active">{{ Auth::user()->email }}</p>
             </div>
+        </div>
+        {{-- right --}}
+        <div class="">
         </div>
     </div>
 </div>

@@ -33,6 +33,8 @@ class PertemuanController extends Controller
     public function store(PostPertemuanRequest $request)
     {
         try {
+            // $datasiswa = User::with('kelas')->find(Atuh::user()->id);    
+            // dd($datasiswa);
             $data = [
                 'user_id' => Auth::check() ? (Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id) : null,
                 'guru_id' => Auth::check() ? (Auth::user()->role == 'guru' ? Auth::user()->id : $request->guru_id) : null,
