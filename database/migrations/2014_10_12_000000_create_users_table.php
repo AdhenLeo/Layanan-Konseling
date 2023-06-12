@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nip')->unique()->nullable();
             $table->enum('jk', ['L', 'P'])->nullable();
             $table->string('email')->unique();
-            $table->string('profile')->default('/img/profile.png');
+            $table->string('profile')->default('img/profile.png');
             $table->string('password');
             $table->enum('role', ['admin', 'guru', 'walas', 'user'])->default('user');
             // $table->timestamp('email_verified_at')->nullable();

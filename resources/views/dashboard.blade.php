@@ -10,8 +10,11 @@
 
 @section('content')
 <div>
-    @include('partials.dashboards.admin')  
 
+    @if (Auth::user()->role == 'admin')
+    @include('partials.dashboards.admin')  
+        
+    @endif
     @include('partials.dashboards.guru')
 </div>
 @endsection
