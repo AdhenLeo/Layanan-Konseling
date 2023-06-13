@@ -10,7 +10,7 @@ class ArsipController extends Controller
     public function index()
     {
         $datas = Pertemuan::with('siswa', 'guru')->get();
-        return view('arsip.index');
+        return view('arsip.index', compact('datas'));
     }
 
     public function create()
