@@ -38,7 +38,8 @@
                         <p class="ml-3 {{ Request::is('kelas*') ? 'text-primary' : '' }}">Kelas</p>
                     </a>
                 </li>
-            @elseif(Auth::user()->role == 'admin')
+                @endif
+            @if(Auth::user()->role == 'admin')
                 <li>
                     <a href="{{ route('user.index') }}">
                         <div class="{{ Request::is('user*') ? 'icon-active' : '' }}">
