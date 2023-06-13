@@ -178,7 +178,7 @@
                     </a>
                 </li>
                 @endif
-                @if (Auth::user()->role == 'guru')
+                @if (Auth::user()->role == 'guru' || Auth::user()->role == 'user')
                 <li>
                     <a href="{{ route('pertemuan.index') }}"
                         class="{{ Request::is('pertemuan*') ? 'icon-active-responsive' : 'px-2' }}">

@@ -20,12 +20,12 @@ class PertemuanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isCantWalas');
+        $this->middleware('isCantWalas')->except('index');
         $this->middleware('isCantAdmin');
     }
     public function index()
     {
-        $datas = Auth::user()->role == 'guru' ? Pertemuan::with('user', 'guru')->where('guru_id', Auth::user()->id)->orderBy('tgl', 'DESC')->paginate(4) : Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(4);
+        $datas = getPertemuans();
 
         return view('pertemuan.index', compact('datas'));
     }
@@ -65,6 +65,12 @@ class PertemuanController extends Controller
     public function show($id)
     {
         $data = Pertemuan::find($id);
+
+        $date = Carbon::parse($data->tgl);
+        if($date->isPast() && $data->status == 'pending'){
+            $data->update(['status'=> 'accept']);
+        }
+        
         return view('pertemuan.show', compact('data'));
     }
 

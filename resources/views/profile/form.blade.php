@@ -25,7 +25,7 @@
                     <p class="font-bold text-[20px] leading-7 min-w-20">{{ Auth::user()->nama }}</p>
                     <span class="material-symbols-outlined hidden">more_horiz</span>
                 </div>
-                <p class="font-base leading-3 text-non-active">{{ Auth::user()->role }}</p>
+                {{-- <p class="font-base leading-3 text-non-active">{{ Auth::user()->role }}</p> --}}
             </div>
             <div>
             </div>

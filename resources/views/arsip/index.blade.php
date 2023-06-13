@@ -41,7 +41,7 @@
                             <td>{{ $data->guru->nama }}</td>
                             <td>{{ Carbon\Carbon::parse($data->tgl)->translatedFormat('l, d F Y H:i') }}</td>
                             <td>
-                                <p class="badge-success w-fit">{{ $data->status }}</p>
+                                <p class="badge-primary w-fit">{{ $data->status }}</p>
                             </td>
                         </tr>
                     @endforeach

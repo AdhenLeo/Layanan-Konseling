@@ -14,7 +14,7 @@
     @if (Auth::user()->role == 'admin')
     @include('partials.dashboards.admin')  
     @endif
-    @if (Auth::user()->role == 'guru' || Auth::user()->role == 'user')
+    @if (Auth::user()->role == 'guru' || Auth::user()->role == 'user' || Auth::user()->role == 'walas')
     @include('partials.dashboards.guru')
     @endif
 </div>

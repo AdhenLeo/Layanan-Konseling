@@ -49,7 +49,7 @@
         <form action="{{ route('pertemuan.update', $data->id) }}" method="post">
             @method('patch')
             @csrf
-            <div class="mt-5 flex gap-7 justify-between mx-auto">
+            <div class="mt-5 flex sm:flex-row flex-col gap-7 justify-between mx-auto">
                 {{-- left --}}
                 <div class="w-full">
                     <div class="">
@@ -70,7 +70,7 @@
                         <input type="text" value="{{ $data->tmpt }}" name="tmpt" disabled class="input-form">
                     </div>
                 </div>
-                <div class="border-l border-non-active"></div>
+                <div class="border-l border-non-active sm:bloc hidden"></div>
                 {{-- right --}}
                 <div class="w-full">
                     <div>

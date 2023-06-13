@@ -21,7 +21,7 @@
             </div>
             <div class="flex sm:items-start items-center flex-col gap-3">
                 <p class="text-[20px] font-bold leading-5">{{ Auth::user()->nama }}</p>
-                <p class="text-base font-semibold leading-3 text-non-active">{{ Auth::user()->role }}</p>
+                {{-- <p class="text-base font-semibold leading-3 text-non-active">{{ Auth::user()->role }}</p> --}}
                 <a href="{{ route('profile.formedit') }}" class="btn-primary-form">Edit Profile</a>
             </div>
         </div>

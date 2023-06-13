@@ -52,6 +52,22 @@ if (!function_exists('getGuruSiswa')) {
     }
 }
 
+if (!function_exists('getPertemuanWalas')) {
+    function getPertemuans()
+    {
+        if(Auth::user()->role == "walas"){
+            $siswas = getSiswaGuru();
+            $datas = Pertemuan::with('user', 'guru')->whereIn('user_id', $siswas)->orderBy('id', 'DESC')->paginate(4);
+        }elseif(Auth::user()->role == "guru"){
+            $datas = Pertemuan::with('user', 'guru')->where('guru_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(4);
+        }elseif(Auth::user()->role == "user"){
+            $datas = Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(4);
+        }
+
+        return $datas;
+    }
+}
+
 if (!function_exists('getCountAndPertemuans')) {
     function getCountAndPertemuans()
     {
@@ -73,7 +89,7 @@ if (!function_exists('getCountAndPertemuans')) {
             $countwaiting = Pertemuan::whereIn('user_id', $siswas)->where('status', 'waiting')->get();
 
             // menggenerate pertemuan di dashboard di setiap role
-            $pertemuans = Pertemuan::with('user', 'guru')->whereIn('user_id', $siswas)->orderBy('id', 'DESC')->paginate(4);
+            $pertemuans = Pertemuan::with('user', 'guru')->whereIn('user_id', $siswas)->where('status', 'waiting')->orderBy('id', 'DESC')->paginate(4);
         }elseif(Auth::user()->role == 'user'){
             // menghitung count berdasarkan role
             $countacc = Pertemuan::where('user_id', Auth::user()->id)->where('status', 'accept')->get();
