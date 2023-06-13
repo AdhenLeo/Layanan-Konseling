@@ -24,7 +24,7 @@
             @if (isset($data))
                 @method('patch')
             @endif
-            <div class="flex sm:flex-row flex-col  gap-4 ">
+            <div class="flex flex-col gap-4 " id="wrapper">
                 {{-- left --}}
                 <div class="mt-11 w-full">
                     <div class="">
@@ -51,6 +51,11 @@
                         </div>
                     </div>
                     <div class="mt-3">
+                        <p class="font-semibold text-base text-non-active mb-2">NIP/NISN</p>
+                        <input type="number" value="{{ isset($data) ? $data->nip : old('nip') }}" class="input-form"
+                            name="nip" required autocomplete="off">
+                    </div>
+                    <div class="mt-3">
                         <p class="font-semibold text-base text-non-active mb-2">Email</p>
                         <input type="email" value="{{ isset($data) ? $data->email : old('email') }}" class="input-form"
                             name="email" required autocomplete="off">
@@ -74,22 +79,23 @@
                 {{-- right --}}
                 <div class="sm:mt-11 mt-3 w-full">
                     <div id="form-guru" hidden>
-                        <div class="">
+                        <p class="font-bold text-[20px]">Data Guru</p>
+                        <div class="mt-3">
                             <p class="font-semibold text-base text-non-active mb-2">Visi</p>
-                            <textarea class="input-form" name="visi" cols="40"></textarea>
+                            <textarea class="input-form" name="visi">{{ isset($data->guru) ? $data->guru->visi : '' }}</textarea>
                         </div>
                         <div class="mt-3">
                             <p class="font-semibold text-base text-non-active mb-2">Misi</p>
-                            <textarea class="input-form" name="misi" cols="40"></textarea>
+                            <textarea class="input-form" name="misi" cols="40">{{ isset($data->guru) ? $data->guru->misi : '' }}</textarea>
                         </div>
                         <div class="mt-3">
                             <p class="font-semibold text-base text-non-active mb-2">Bio</p>
-                            <textarea class="input-form" name="biodata" cols="40"></textarea>
+                            <textarea class="input-form" name="biodata" cols="40">{{ isset($data->guru) ? $data->guru->biodata : '' }}</textarea>
                         </div>
                     </div>
                     <div class="mt-3 ">
                         <p class="font-semibold text-base text-non-active mb-2">Profile</p>
-                        <div class="drag-area overflow-hidden">
+                        <div class="drag-area sm:h-[377px] h-[300px] overflow-hidden">
                             <div class="icon">
                                 <i class="fa fa-files-o" aria-hidden="true"></i>
                             </div>
@@ -99,7 +105,7 @@
                             <div id="result" class="flex items-center justify-center bg-contain"></div>
                             <span class="header">Drag & Drop</span>
                             <span class="header">atau <span class="button">Cari</span></span>
-                            <input type="file" name="profile" id="file-input" hidden>
+                            <input type="file" accept="image/*" name="profile" id="file-input" hidden>
                         </div>
                     </div>
                 </div>
@@ -123,10 +129,24 @@
     <script src="{{ asset('assets/js/drag&drop.js') }}"></script>
 
     <script>
+        if($('#role').val() == 'guru') { 
+            $('#form-guru').removeAttr('hidden') 
+            $('#wrapper').removeClass('sm:flex-row');
+            $('.drag-area').removeClass('sm:h-[377px]');
+        }else {
+            $('#form-guru').attr('hidden', 'true')
+            $('#wrapper').addClass('sm:flex-row');
+            $('.drag-area').addClass('sm:h-[377px]');
+        }
         $('#role').change(function(e) {
-            console.log($(this).val());
-            $(this).val() == 'guru' ? $('#form-guru').removeAttr('hidden') : $('#form-guru').attr('hidden', 'true')
-
+            let valRole = $(this).val()
+            if(valRole == 'guru') { 
+                $('#form-guru').removeAttr('hidden') 
+                $('#wrapper').removeClass('sm:flex-row');
+            }else {
+                $('#form-guru').attr('hidden', 'true')
+                $('#wrapper').addClass('sm:flex-row');
+            }
         });
     </script>
 @endpush

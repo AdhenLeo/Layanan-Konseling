@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Kelas;
+use App\Models\User;
+use App\Models\UserKelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('AdminOrGuruOrWalas');
+    }
+
     public function index()
     {
         $datas = Kelas::paginate(4);
-        return view('kelas.index', compact('datas'));
+        $kelas = UserKelas::with('user', 'kelas')->where('user_id', Auth::user()->id)->get();
+        return view('kelas.index', compact('datas', 'kelas'));
     }
 
     public function create()
@@ -35,9 +44,10 @@ class KelasController extends Controller
         }
     }
 
-    public function show(Kelas $kelas)
+    public function show($id)
     {
-        return view('kelas.show', compact('kelas'));
+        $datas = Kelas::with('user')->find($id);
+        return view('kelas.show', compact('datas'));
     }
 
     public function edit($id)
@@ -65,7 +75,7 @@ class KelasController extends Controller
     public function destroy($id)
     {
         $kelas = Kelas::find($id);
-        if(!$kelas) return abort(404);
+        if (!$kelas) return abort(404);
 
         $kelas->delete();
 

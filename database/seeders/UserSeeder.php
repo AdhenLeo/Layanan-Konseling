@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         'nip' => '23023912',
         'jk' => 'L',
         'email' => 'user@gmail.com',
-        'profile' => '/img/profile.png',
+        // 'profile' => 'img/profile.png',
         'password' =>Hash::make ('123123'),
         'role' => 'user',
        ];
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         'nip' => '23023312',
         'jk' => 'L',
         'email' => 'admin@gmail.com',
-        'profile' => '/img/profile.png',
+        // 'profile' => '/img/profile.png',
         'password' =>Hash::make('123123'),
         'role' => 'admin',
        ];
@@ -38,42 +38,49 @@ class UserSeeder extends Seeder
         'nip' => '230132312',
         'jk' => 'L',
         'email' => 'walas@gmail.com',
-        'profile' => '/img/profile.png',
+        // 'profile' => '/img/profile.png',
         'password' =>Hash::make ('123123'),
-        'role' => 'user',
+        'role' => 'walas',
        ];
-       $dataGuru =  [
+       $dataAkunGuru =  [
         'nama' => 'Guru',
         'nip' => '49320423',
         'jk' => 'L',
         'email' => 'guru@gmail.com',
-        'profile' => '/img/profile.png',
+        // 'profile' => '/img/profile.png',
         'password' =>Hash::make ('123123'),
         'role' => 'guru',
        ];
         
-        $user = User::create($dataWalas);
-        $user = User::create($dataAdmin);
-        $user = User::create($dataUser);
+        $walas = User::create($dataWalas);
+        $admin = User::create($dataAdmin);
+        $siswa = User::create($dataUser);
+        
+        $guru = User::create($dataAkunGuru);
         $dataGuru =  [
-            'user_id' =>$user->id,
+            'user_id' =>$guru->id,
             'biodata' => 'biodata',
             'visi' => 'visinya',
             'misi' => 'misiii',
            ];
-        $user = Guru::create($dataGuru);
+        Guru::create($dataGuru);
 
         UserKelas::create([
-            'user_id' => $user->id,
+            'user_id' => $siswa->id,
+            'kelas_id' => 1
+        ]);
+        UserKelas::create([
+            'user_id' => $walas->id,
+            'kelas_id' => 1
+        ]);
+        UserKelas::create([
+            'user_id' => $admin->id,
+            'kelas_id' => 1
+        ]);
+        UserKelas::create([
+            'user_id' => $guru->id,
             'kelas_id' => 1
         ]);
 
-        $dataguru = [
-            'user_id' => $user->id,
-            'visi'=>'aaaaaa',
-            'misi'=>'bbbbb',
-        ];
-
-        $user->role == 'guru' ? Guru::create($dataguru) : '';
     }
 }

@@ -1,65 +1,56 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    {{ isset($data) ? 'Edit Profile' : 'Tambah Profile' }}
+    Edit Profile
 @endsection
 
 @section('sub_title')
-    {{ isset($data) ? 'Edit Profile' : 'Tambah Profile' }}
+    Edit Profile
 @endsection
 
-@section('modal')
-    @include('partials.modals.modalpetakerawanan')
-@endsection
 
 @section('content')
 <div class="w-11/12 my-10 flex sm:flex-row flex-col gap-8 mx-auto">
     {{-- left --}}
-    <div class="rounded-xl sm:w-5/6 w-full bg-white p-5">
+    <div class="rounded-xl sm:w-5/6 w-full h-fit bg-white p-5">
         <div class="p-3">
             <p class="font-semibold text-[20px]">Update Profile</p>
         </div>
         <div class="mx-auto px-4 mt-3 border-t border-non-active flex sm:flex-row flex-col items-center sm:gap-8 gap-2">
-            <div class="w-[100px] h-[100px] mt-8 bg-non-active rounded-full">
-
+            <div class="w-[100px] h-[100px] mt-8 bg-non-active rounded-full overflow-clip">
+                <img src="{{ Auth::user()->profile != 'img/profile.png' ? asset('storage/'. Auth::user()->profile) : asset(Auth::user()->profile) }}" alt="">
             </div>
             <div class="mt-10 text-left flex flex-col gap-3">
-                <div class="flex items-center gap-16">
-                    <p class="font-bold text-[20px] leading-7">Nama Admin</p>
+                <div class="flex items-center gap-10">
+                    <p class="font-bold text-[20px] leading-7 min-w-20">{{ Auth::user()->nama }}</p>
                     <span class="material-symbols-outlined hidden">more_horiz</span>
                 </div>
-                <p class="font-base leading-3 text-non-active">Super Admin</p>
+                <p class="font-base leading-3 text-non-active">{{ Auth::user()->role }}</p>
             </div>
             <div>
             </div>
         </div>
-        <div class="w-11/12 mt-10 mx-auto border-t border-non-active flex">
-            <div class="w-11/12 mt-4 mx-auto">
-                <div>
-                    {{-- kelas --}}
-                    <p class="text-[13px] font-semibold">Kelas</p>
-                    <div class="mt-2 gap-4">
-                        <div class="inline-block mt-2">
-                            {{-- tags --}}
-                            <div class="flex items-center w-fit bg-secondary rounded-lg px-3 py-2">
-                                <p class="text-[12px] min-w-max">XI PPLG 1</p>
+        @if (Auth::user()->role != 'admin')
+            {{-- detail --}}
+            <div class="w-11/12 mt-10 mx-auto border-t border-non-active flex">
+                <div class="w-11/12 mt-4 mx-auto">
+                    <div>
+                        {{-- kelas --}}
+                        <p class="text-[13px] font-semibold">Kelas</p>
+                        <div class="mt-2 gap-4">
+                            <div class="inline-block mt-2">
+                                {{-- tags --}}
+                                @foreach ($data->kelas as $kelas)
+                                    <div class="flex items-center w-fit bg-secondary rounded-lg px-3 py-2">
+                                        <p class="text-[12px] min-w-max">{{ $kelas->nama }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                        
                     </div>
-                </div>
-                {{-- petakerawanan --}}
-                <div class="mt-5">
-                    <p class="text-[13px] font-semibold">Peta Kerawanan</p>
-                    <div class="mt-2 gap-4" id="result-tags">
-                        {{-- ajax --}}
-                    </div>
-                </div>
-                <div class="mt-5 flex">
-                    <button class="p-2 bg-primary flex items-center text-white rounded-full" onclick="modal_petakerawanan.showModal()"><span class="material-symbols-outlined">add_circle</span></button>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
     {{-- right --}}
     <div class="rounded-xl h-fit w-full bg-white p-5">
@@ -67,21 +58,22 @@
             <p class="font-semibold text-[20px]">Display Information</p>
         </div>
         <div class="mx-auto px-4 mt-3 border-t border-non-active flex flex-col gap-8">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="{{ route('profile.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
                 @csrf
                 <div class="flex sm:flex-row flex-col w-full mx-auto mt-16 gap-6">
                     <div class="w-full">
                         <div class="">
                             <p class="mb-2 font-semibold">Nama</p>
-                            <input type="text" required class="input-form">
+                            <input type="text" name="nama" value="{{ Auth::user()->nama }}" required class="input-form">
                         </div>
                         <div class="mt-5">
                             <p class="mb-2 font-semibold">Email</p>
-                            <input type="email" required class="input-form">
+                            <input type="email" name="email" value="{{ Auth::user()->email }}" required class="input-form">
                         </div>
                         <div class="mt-5">
                             <p class="mb-2 font-semibold">Password</p>
-                            <input type="password" class="input-form">
+                            <input type="password" name="password" class="input-form">
                         </div>
                     </div>
                     <div class="w-full">
@@ -104,9 +96,3 @@
     </div>    
 </div>
 @endsection
-
-@push('js')
-    <script>
-        Component.showPetaKerawanan({route: "{{ route('profile.show', 1) }}", token: "{{ csrf_token() }}"})
-    </script>
-@endpush

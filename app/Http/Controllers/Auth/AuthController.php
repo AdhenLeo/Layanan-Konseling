@@ -33,14 +33,14 @@ class AuthController extends Controller
         // }
 
         $login = Auth::login($data);
-        insertLog('login');
+        Auth::user()->role != 'admin' ? insertLog('login') : null;
 
         return redirect()->route('dashboard')->with('msg_success', 'Berhasil melakukan login');
     }
 
     public function logout()
     {
-        insertLog('logout');
+        Auth::user()->role != 'admin' ? insertLog('logout') : null;
         Auth::logout();
 
         return redirect()->route('auth.login')->with('msg_success', 'Berhasil melakukan logout');

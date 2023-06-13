@@ -2,7 +2,7 @@
     <div>
         <form action="{{ route('petakerawanan.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="drag-area overflow-hidden">
+            <div class="drag-area h-[300px] overflow-hidden">
                 <div class="icon">
                     <i class="fa fa-files-o" aria-hidden="true"></i>
                 </div>

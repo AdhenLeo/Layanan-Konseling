@@ -43,17 +43,19 @@ class Component {
     }
 
     static showPetaKerawanan = ({route: route}) => {
+        // console.log(route)
         $.ajax({
             type: "GET",
             url: route,
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 $('#result-tags').html(res);
             }
         });
     }
 
     static deletePetaKerawanan = ({route: route, token: token, routeshow: routeshow}) => {
+        console.log(routeshow)
         $.ajax({
             type: "DELETE",
             url: route,

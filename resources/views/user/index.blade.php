@@ -49,11 +49,6 @@
                             </td>
                             <td>
                                 <div class="flex gap-2 items-center">
-                                    <a href="{{ route('user.show', $data->id) }}" class="text-detail">
-                                        <span class="material-symbols-outlined">
-                                            info
-                                        </span>
-                                    </a>
                                     <a href="{{ route('user.edit', $data->id) }}" class="text-warning">
                                         <span class="material-symbols-outlined">
                                             discover_tune

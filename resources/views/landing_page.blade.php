@@ -61,7 +61,7 @@
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     @vite('resources/css/app.css')
-    <title>@yield('title')</title>
+    <title>Deep Talk</title>
     @stack('css')
 </head>
 

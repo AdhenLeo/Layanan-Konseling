@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     KelasController,
     PertemuanController,
     PetaKerawananController,
+    ProfileController,
     UserController,
     UserPetaKerawananController
 };
@@ -31,19 +32,23 @@ Route::name('auth.')->group(function(){
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware('hasLoginAdmin')->group(function () {
-        Route::resource('kelas',KelasController::class);
-        Route::resource('user',UserController::class);
-        Route::resource('aktivitas',AktivitasController::class);
-        Route::resource('arsip',ArsipController::class);
-        Route::resource('petakerawanan',PetaKerawananController::class);
-        Route::prefix('petakerawanan')->name('petakerawanan.')->group(function(){
-            Route::post('/import', [PetaKerawananController::class, 'import'])->name('import');
-        });
+    Route::resource('kelas',KelasController::class);
+    Route::resource('user',UserController::class);
+    Route::resource('aktivitas',AktivitasController::class);
+    Route::resource('petakerawanan',PetaKerawananController::class);
+    Route::prefix('petakerawanan')->name('petakerawanan.')->group(function(){
+        Route::post('/import', [PetaKerawananController::class, 'import'])->name('import');
     });
 
+    Route::resource('userpetakerawanan', UserPetaKerawananController::class);
+    
+    Route::resource('arsip',ArsipController::class);
     Route::resource('pertemuan',PertemuanController::class);
-    Route::resource('profile', UserPetaKerawananController::class);
+    // route profile
+    Route::resource('profile', ProfileController::class);
+    Route::prefix('profile/user/')->name('profile.')->group(function(){
+        Route::get('form', [ProfileController::class, 'formProfile'])->name('formedit');
+    });
 
     Route::get('/generatepdf', function(){
         $pdf = Pdf::loadView('pdf.index');

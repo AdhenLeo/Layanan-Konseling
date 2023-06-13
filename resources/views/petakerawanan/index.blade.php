@@ -5,7 +5,7 @@
 @endsection
 
 @section('sub_title')
-    Peta Kerawanan Siswa
+    Peta Kerawanan 
 @endsection
 
 @push('css')

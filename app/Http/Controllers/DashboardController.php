@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{
     Kelas,
     Log,
+    PetaKerawanan,
     User
 };
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class DashboardController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
-        $users = User::all();
+        $users = User::whereNot('role', 'admin')->get();
+        $petakerawanans = PetaKerawanan::all();
         $logs = Log::with('user')->paginate(5);
-        return view('dashboard', compact('kelas', 'users', 'logs'));
+        return view('dashboard', compact('kelas', 'users', 'logs', 'petakerawanans'));
     }
 }

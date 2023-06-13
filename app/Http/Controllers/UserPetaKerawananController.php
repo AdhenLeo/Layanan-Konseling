@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PetaKerawanan;
-use App\Models\UserPetaKerawanan;
+use App\Models\{
+    PetaKerawanan,
+    User,
+    UserPetaKerawanan
+};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserPetaKerawananController extends Controller
 {
     public function index()
     {
-        return view('profile.index');
+        return view('user.show');
     }
 
     public function create()
@@ -31,21 +35,34 @@ class UserPetaKerawananController extends Controller
 
     public function edit($id)
     {
+        $data = User::find($id); 
         $petakerawanans = PetaKerawanan::with('user')->get();
         $datas = UserPetaKerawanan::with('peta_kerawanan', 'user')->where('user_id', $id)->get();
         $datapeta = [];
         foreach($datas as $i => $peta){
             $datapeta[] = $peta->peta_kerawanan_id;
         }
-        return view('profile.form', compact('datas', 'petakerawanans', 'datapeta'));
+        return view('user.form', compact('datas', 'petakerawanans', 'datapeta', 'data'));
     }
 
     public function update(Request $request, $id)
     {
         try {
-            foreach ($request->peta_kerawanan_id as $i => $petakerawanan) {
-                $data = UserPetaKerawanan::create(['user_id' => $id, 'peta_kerawanan_id' => $petakerawanan]);
+            $siswa = User::find($id);
+            $datasiswa = [
+                'ket' => $request->ket
+            ];
+            
+            // menambahkan peta kerawanan ke siswa
+            if(isset($request->peta_kerawanan_id)){
+                foreach ($request->peta_kerawanan_id as $i => $petakerawanan) {
+                    $data = UserPetaKerawanan::create(['user_id' => $id, 'peta_kerawanan_id' => $petakerawanan]);
+                }
             }
+
+            // mengisi kesimpulan peta kerawanan
+            $siswa->update($datasiswa);
+
             return back()->with('msg_success', "Berhasil menambahkan petakerawanan kepada siswa");
         } catch (\Throwable $th) {
             return back()->with('msg_error', "Gagal menambahkan petakerawanan kepada siswa");

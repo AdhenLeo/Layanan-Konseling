@@ -13,6 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PetaKerawananController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isCanAdmin');
+    }
+
     public function index()
     {
         $datas = PetaKerawanan::paginate(5);

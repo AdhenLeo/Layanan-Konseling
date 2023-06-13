@@ -11,13 +11,8 @@ class Kelas extends Model
 
     protected $guarded = ['id'];
 
-    public function guru()
+    public function user()
     {
-        return $this->belongsToMany(Guru::class, PenggunaKelas::class);
-    }
-
-    public function walas()
-    {
-        return $this->hasMany(Walas::class);
+        return $this->belongsToMany(User::class, UserKelas::class);
     }
 }

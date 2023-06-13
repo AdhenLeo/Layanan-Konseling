@@ -12,7 +12,9 @@ use App\Models\{
     Kelas,
     Pengguna,
     PenggunaKelas,
+    PetaKerawanan,
     UserKelas,
+    UserPetaKerawanan,
     WaliKelas
 };
 use Illuminate\Support\Facades\{
@@ -25,7 +27,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $datas = User::with('kelas')->paginate(4);
+        $datas = User::with('kelas')->whereNot('role', 'admin')->paginate(4);
         return view('user.index', compact('datas'));
     }
 
@@ -71,7 +73,14 @@ class UserController extends Controller
 
     public function show($id)
     {
-        
+        $data = User::with('kelas')->find($id); 
+        $petakerawanans = PetaKerawanan::with('user')->get();
+        $datas = UserPetaKerawanan::with('peta_kerawanan', 'user')->where('user_id', $id)->get();
+        $datapeta = [];
+        foreach($datas as $i => $peta){
+            $datapeta[] = $peta->peta_kerawanan_id;
+        }
+        return view('user.petakerawanan.form', compact('data', 'petakerawanans', 'datapeta'));
     }
 
     public function edit(User $user)
@@ -90,6 +99,8 @@ class UserController extends Controller
                 'nama' => $request->nama,
                 'email' => $request->email,
             ];
+
+            $request->nip ? $data['nip'] = $request->nip : null;
 
             $request->role ? $data['role'] = $request->role : null;
             

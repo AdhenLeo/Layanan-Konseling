@@ -38,6 +38,7 @@ module.exports = {
         'max': 'max-content',
         '10': '100px',
         '15': '150px',
+        '17': '170px',
         '20': '200px',
         '25': '250px',
       },

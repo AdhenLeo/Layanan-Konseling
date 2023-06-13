@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class hasLoginAdmin
+class isCantWalas
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class hasLoginAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role != 'admin'){
+        if(Auth::user()->role == 'walas'){
             return back()->with('msg_info', 'Tidak memiliki akses');
         }
         
