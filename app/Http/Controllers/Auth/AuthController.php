@@ -26,11 +26,10 @@ class AuthController extends Controller
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }
         
-        // if($request->remember == 'on'){
-        //     $response = response('cookie');
-        //     $response->withCookie('email_nisn_nip', $request->email, 1);
-        //     $response->withCookie('password', $request->password, 1);
-        // }
+        if($request->remember == 'on'){
+            setCookie('email', $request->email, time() + 3600);
+            setCookie('password', $request->password, time() + 3600);
+        }
 
         $login = Auth::login($data);
         Auth::user()->role != 'admin' ? insertLog('login') : null;

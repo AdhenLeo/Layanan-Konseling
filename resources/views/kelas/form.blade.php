@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    {{ isset($data) ? 'Edit Kelas' : 'Tambah Kelas' }}
+    {{ isset($data) ? 'Edit Kelas - DeepTalk' : 'Tambah Kelas - DeepTalk' }}
 @endsection
 
 @section('sub_title')

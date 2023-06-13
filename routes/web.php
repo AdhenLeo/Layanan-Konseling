@@ -33,7 +33,13 @@ Route::name('auth.')->group(function(){
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('kelas',KelasController::class);
+    // route user
     Route::resource('user',UserController::class);
+    Route::prefix('userkelas')->name('userkelas.')->group(function(){
+        Route::get('/showkelasguru/{id}', [UserController::class, 'showKelasGuru'])->name('show');
+        Route::delete('/destroykelasguru/{id}', [UserController::class, 'destroyKelasguru'])->name('destroy');
+    });
+
     Route::resource('aktivitas',AktivitasController::class);
     Route::resource('petakerawanan',PetaKerawananController::class);
     Route::prefix('petakerawanan')->name('petakerawanan.')->group(function(){

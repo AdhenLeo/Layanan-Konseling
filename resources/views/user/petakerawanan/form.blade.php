@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Edit User
+    Edit User - DeepTalk
 @endsection
 
 @section('sub_title')
@@ -108,6 +108,6 @@
 
 @push('js')
     <script>
-        Component.showPetaKerawanan({route: "{{ route('userpetakerawanan.show', $data->id) }}", token: "{{ csrf_token() }}"})
+        Component.showPetaKerawanan({route: "{{ route('userpetakerawanan.show', $data->id) }}"})
     </script>
 @endpush

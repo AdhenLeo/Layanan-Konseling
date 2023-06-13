@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Peta Kerawanan
+    Peta Kerawanan - DeepTalk
 @endsection
 
 @section('sub_title')

@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Arsip
+    Arsip - DeepTalk
 @endsection
 
 @section('sub_title')

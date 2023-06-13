@@ -34,19 +34,19 @@
                     <form action="{{ route('auth.post.login') }}" method="post">
                         @csrf
                         <div>
-                            <input type="email" autocomplete="off" value="{{ isset($data) ? $data->email : old('email') }}" placeholder="Email, nisn atau nip" name="email" required class="input-form-login @error('email') input-form-error @enderror">
+                            <input type="email" autocomplete="off" value="{{ isset($data) ? $data->email : (isset($_COOKIE['email']) ? $_COOKIE['email'] : old('email') ) }}" placeholder="Email, nisn atau nip" name="email" required class="input-form-login @error('email') input-form-error @enderror">
                             @error('email')
                                 <small class="font-semibold text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="mt-5">
-                            <input type="password" autocomplete="off" value="{{ isset($data) ? $data->password : '' }}" name="password" required placeholder="Password" class="input-form-login @error('password') input-form-error @enderror">
+                            <input type="password" autocomplete="off" value="{{ isset($data) ? $data->password : old('password') }}" name="password" required placeholder="Password" class="input-form-login @error('password') input-form-error @enderror">
                             @error('password')
                                 <small class="font-semibold text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="mt-5 flex gap-2 items-center">
-                            <input type="checkbox" name="remember" id="" class="accent-primary w-4 h-4 p-2">
+                            <input type="checkbox" {{ isset($_COOKIE['email']) ? 'checked' : '' }} name="remember" id="" class="accent-primary w-4 h-4 p-2">
                             <p class="text-non-active">Remember me</p>
                         </div>
                         <div class="mt-5">

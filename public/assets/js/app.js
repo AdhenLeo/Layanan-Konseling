@@ -71,6 +71,35 @@ class Component {
         });
     }
 
+    static showKelasGuru = ({route: route}) => {
+        console.log(route)
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function (res) {
+                // console.log(res);
+                $('#result-tags').html(res);
+            }
+        });
+    }
+
+    static deleteKelasGuru = ({route: route, token: token, routeshow: routeshow}) => {
+        // console.log(routeshow)
+        $.ajax({
+            type: "DELETE",
+            url: route,
+            data: {
+                _token: token,
+            },
+            success: function (res) {
+                if(res == "msg_success") {
+                    Component.showAlert('Berhasil menghapus peta kerawanan pada siswa', 'success')
+                    Component.showPetaKerawanan({route: routeshow})
+                }
+            }
+        });
+    }
+
     static toggleActive = (event) => {
         const divElement = event.target.parentElement;
         divElement.classList.toggle('bg-primary');

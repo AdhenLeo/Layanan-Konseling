@@ -24,7 +24,7 @@
                     <p class="ml-3 {{ Request::is('dashboard*') ? 'text-primary' : '' }}">Dashboard</p>
                 </a>
             </li>
-            @if (Auth::user()->role == 'admin')
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
                 <li>
                     <a href="{{ route('kelas.index') }}">
                         <div class="{{ Request::is('kelas*') ? 'icon-active' : '' }}">
@@ -146,7 +146,7 @@
                     </a>
                 </li>
                 @endif
-                @if (Auth::user()->role == 'guru')
+                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
                 <li>
                     <a href="{{ route('kelas.index') }}"
                         class="{{ Request::is('kelas*') ? 'icon-active-responsive' : 'px-2' }}">

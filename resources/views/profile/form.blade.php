@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Edit Profile
+    Edit Profile - DeepTalk
 @endsection
 
 @section('sub_title')
@@ -37,15 +37,17 @@
                     <div>
                         {{-- kelas --}}
                         <p class="text-[13px] font-semibold">Kelas</p>
-                        <div class="mt-2 gap-4">
-                            <div class="inline-block mt-2">
-                                {{-- tags --}}
+                        <div class="mt-2 gap-4" id="result-tags">
+                            {{-- ajax --}}
+                            @if (Auth::user()->role != 'guru')
                                 @foreach ($data->kelas as $kelas)
+                                <div class="inline-block mt-2">
                                     <div class="flex items-center w-fit bg-secondary rounded-lg px-3 py-2">
                                         <p class="text-[12px] min-w-max">{{ $kelas->nama }}</p>
                                     </div>
+                                </div>
                                 @endforeach
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -96,3 +98,11 @@
     </div>    
 </div>
 @endsection
+
+@if (Auth::user()->role == 'guru')
+@section('js')
+    <script>
+        Component.showKelasGuru({route: "{{ route('userkelas.show', Auth::user()->id) }}"})
+    </script>
+@endsection
+@endif

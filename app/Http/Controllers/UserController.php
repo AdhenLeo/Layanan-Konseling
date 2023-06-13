@@ -25,6 +25,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isCantSiswa');
+    }
+
     public function index()
     {
         $datas = User::with('kelas')->whereNot('role', 'admin')->paginate(4);
@@ -169,6 +174,16 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             dd("not success: ". $th);
             return redirect()->route('guru.index')->with('msg_error', 'Gagal menambahkan guru');
+        }
+    }
+
+    public function showKelasGuru($id){
+        try {
+            $data = UserKelas::with('kelas', 'user')->where('user_id', $id)->get();
+
+            return view('');
+        } catch (\Throwable $th) {
+            return "msg_error";
         }
     }
 }

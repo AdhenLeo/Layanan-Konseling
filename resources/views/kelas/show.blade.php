@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Siswa
+    Siswa - DeepTalk
 @endsection
 
 @section('sub_title')

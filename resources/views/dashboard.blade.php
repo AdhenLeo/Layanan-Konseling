@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Dashboard
+    Dashboard - DeepTalk
 @endsection
 
 @section('sub_title')
@@ -16,5 +16,6 @@
     @endif
     @if (Auth::user()->role == 'guru')
     @include('partials.dashboards.guru')
+    @endif
 </div>
 @endsection

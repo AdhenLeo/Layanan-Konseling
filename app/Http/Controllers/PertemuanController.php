@@ -9,45 +9,52 @@ use App\Http\Requests\pertemuan\{
 use App\Models\{
     Guru,
     Pertemuan,
-    User
+    User,
+    UserKelas
 };
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PertemuanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isCantWalas');
+        $this->middleware('isCantAdmin');
+    }
     public function index()
     {
-        $datas = Pertemuan::with('siswa', 'guru')->get();
-        return view('pertemuan.index');
+        $datas = Auth::user()->role == 'guru' ? Pertemuan::with('user', 'guru')->where('guru_id', Auth::user()->id)->orderBy('id', 'DESC')->get() : Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+
+        return view('pertemuan.index', compact('datas'));
     }
     public function create()
     {
         $temas = ['Bimbingan Pribadi', 'Bimbingan Sosial', 'Bimbingan Karir', 'Bimbingan Belajar'];
         $jeniskarirs = ['Bekerja', 'Kuliah', 'Wirausaha',];
-        $gurus = Guru::with('user')->get();
-        $siswas = User::all()->where('role', 'user');
-        return view('pertemuan.form', compact('temas','jeniskarirs', 'gurus', 'siswas'));
+        $siswas = getSiswaGuru();
+        
+        return view('pertemuan.form', compact('temas','jeniskarirs', 'siswas'));
     }
 
     public function store(PostPertemuanRequest $request)
     {
         try {
-            // $datasiswa = User::with('kelas')->find(Atuh::user()->id);    
-            // dd($datasiswa);
+            $guru = getGuruSiswa();
             $data = [
-                'user_id' => Auth::check() ? (Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id) : null,
-                'guru_id' => Auth::check() ? (Auth::user()->role == 'guru' ? Auth::user()->id : $request->guru_id) : null,
+                'user_id' => Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id,
+                'guru_id' => Auth::user()->role == 'guru' ? Auth::user()->id : $guru->user->id,
                 'tema' => $request->tema,
-                'tgl' => $request->tgl,
+                'tgl' => Carbon::parse($request->tgl),
                 'tmpt' => $request->tmpt,
                 'deskripsi' => $request->deskripsi,
-                'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'accept' : 'waiting') : null
+                'status' => Auth::user()->role == 'guru' ? 'accept' : 'waiting',
             ];
 
+            // dd($data);
+
             $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
-            
-            dd(Auth::check());
             
             $pertemuan = Pertemuan::create($data);
             // dd($pertemuan);

@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Profile
+    Profile - DeepTalk
 @endsection
 
 @section('sub_title')

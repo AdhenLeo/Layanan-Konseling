@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('title')
-    Pertemuan
+    Pertemuan - DeepTalk
 @endsection
 
 @section('sub_title')
@@ -17,6 +17,7 @@
     {{-- table --}}
     <div class="mt-10 mx-auto border-t border-non-active p-5">
         {{-- card --}}
+        @foreach ($datas as $data)
         <a href="" class="flex mb-5 hover:bg-non-active hover:bg-opacity-5 transition-colors rounded-xl py-4 px-5 w-full sm:flex-row flex-col overflow-auto shadow-card justify-between items-center">
             {{-- left --}}
             <div class="flex sm:flex-row flex-col items-center gap-7">
@@ -27,20 +28,21 @@
                 </div>
                 <div class="flex flex-col justify-between">
                     <div class="flex sm:flex-row flex-col gap-4 items-center">
-                        <p class="font-bold text-[17px] sm:min-w-0 min-w-15">Ahmad Ali Hamzah</p>
-                        <p class="text-primary font-semibold text-[15px] sm:hidden block">Konsultasi pribadi</p>
+                        <p class="font-bold text-[17px] sm:min-w-0 min-w-15">{{ $data->user->nama }}</p>
+                        <p class="text-primary font-semibold text-[15px] sm:hidden block">{{ $data->tema }}</p>
                     </div>
-                    <p class="text-primary font-semibold sm:block hidden text-[15px]">Konsultasi pribadi</p>
+                    <p class="text-primary font-semibold sm:block hidden text-[15px]">{{ $data->tema }}</p>
                     <div class="mt-4">
-                        <p class="text-[13px] font-semibold text-non-active">Jadwal: Sabtu, 12 Juni 2023</p>
+                        <p class="text-[13px] font-semibold text-non-active">Jadwal: {{ Carbon\Carbon::parse($data->tgl)->translatedFormat('l, d F Y H:i') }}</p>
                     </div>
                 </div>
             </div>
             {{-- right --}}
             <div class="flex gap-4 sm:mt-0 mt-5">
-                <p class="badge-primary">Waiting</p>
+                <p class="badge-primary">{{ $data->status }}</p>
             </div>
         </a>
+        @endforeach
     </div>
     {{-- pagination --}}
     <div class="mt-5">

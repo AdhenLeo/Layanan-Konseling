@@ -36,6 +36,8 @@ class PetaKerawananController extends Controller
             $data = [
                 'jenis' => $request->jenis
             ];
+
+            
             
             PetaKerawanan::create($data);
             // dd($request->all()); 
