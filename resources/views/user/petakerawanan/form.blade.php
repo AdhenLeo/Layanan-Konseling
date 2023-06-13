@@ -20,8 +20,8 @@
             <p class="font-semibold text-[20px]">Update User</p>
         </div>
         <div class="mx-auto px-4 mt-3 border-t border-non-active flex sm:flex-row flex-col items-center sm:gap-8 gap-2">
-            <div class="w-[100px] h-[100px] mt-8 bg-non-active rounded-full overflow-clip">
-                <img src="{{ $data->profile != 'img/profile.png' ? asset('storage/'. $data->profile) : asset($data->profile) }}" class="w-[100px] h-[100px]" alt="">
+            <div class="w-20 h-20 mt-8 bg-non-active rounded-full overflow-clip">
+                <img src="{{ $data->profile != 'img/profile.png' ? asset('storage/'. $data->profile) : asset($data->profile) }}" alt="">
             </div>
             <div class="mt-10 text-left flex flex-col gap-3">
                 <div class="flex items-center gap-10">

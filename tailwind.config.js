@@ -24,6 +24,7 @@ module.exports = {
         'dark-text': '#CBD5E1',
         'non-active': '#C0C0C0',
         'warning': '#EDBA36',
+        'warning-secondary': '#FDF8EB',
         'danger': '#ED3636',
         'danger-secondary':'#FEEBEB',
         'success':'#3AED36',
@@ -45,6 +46,7 @@ module.exports = {
       boxShadow: {
         'card': '0px 0px 2px rgba(0, 0, 0, 0.25)',
         'card_lp': '0px 4px 16px rgba(0, 0, 0, 0.12)',
+        'card-login': '0px 4px 20px rgba(0, 0, 0, 0.25)',
       },
     },
   },

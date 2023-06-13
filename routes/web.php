@@ -12,11 +12,13 @@ use App\Http\Controllers\{
     UserPetaKerawananController
 };
 use App\Http\Controllers\Auth\AuthController;
+use App\Models\Guru;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
-    return view('landing_page');
+    $datas = Guru::with('user')->get();
+    return view('landing_page', compact('datas'));
 })->name('landingpage');
 
 Route::controller(DashboardController::class)->group(function(){

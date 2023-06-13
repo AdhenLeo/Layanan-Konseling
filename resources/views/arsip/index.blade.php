@@ -34,23 +34,22 @@
                     </th>
                 </thead>
                 <tbody>
-                    @foreach ($datas as $data)
+                    @foreach ($datas as $i => $data)
                         <tr class="border-b border-non-active">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data->nama }}</td>
+                            <td>{{ $i + $datas->firstItem() }}</td>
+                            <td>{{ $data->user->nama }}</td>
                             <td>{{ $data->guru->nama }}</td>
-                            <td>{{ $data->tgl }}</td>
+                            <td>{{ Carbon\Carbon::parse($data->tgl)->translatedFormat('l, d F Y H:i') }}</td>
                             <td>
                                 <p class="badge-success w-fit">{{ $data->status }}</p>
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
         <div class="mt-5">
-            {{-- {{ $datas->links() }} --}}
+            {{ $datas->links() }}
         </div>
     </div>
 @endsection

@@ -25,7 +25,7 @@ class PertemuanController extends Controller
     }
     public function index()
     {
-        $datas = Auth::user()->role == 'guru' ? Pertemuan::with('user', 'guru')->where('guru_id', Auth::user()->id)->orderBy('id', 'DESC')->get() : Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+        $datas = Auth::user()->role == 'guru' ? Pertemuan::with('user', 'guru')->where('guru_id', Auth::user()->id)->orderBy('tgl', 'DESC')->paginate(4) : Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(4);
 
         return view('pertemuan.index', compact('datas'));
     }
@@ -54,10 +54,7 @@ class PertemuanController extends Controller
 
             $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
             
-            dd(Auth::check());
-            
             $pertemuan = Pertemuan::create($data);
-            // dd($pertemuan);
 
             return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil membuat pertemuan');
         } catch (\Throwable $th) {
@@ -80,14 +77,18 @@ class PertemuanController extends Controller
     public function update(UpdatePertemuanRequest $request, Pertemuan $pertemuan)
     {
         try {
-            $data = [
-                'tgl' => $request->tgl,
-                'tmpt' => $request->tmpt,
-            ];
+            $data = [];
+            
+            $request->tgl ? $data['tgl'] = Carbon::parse($request->tgl) : null;
+            $request->tmpt ? $data['tmpt'] = $request->tmpt : null;
+            $request->tgl && $request->tmpt ? $data['status'] = 'pending' : $data['status'] = 'accept';
+            $request->kesimpulan ? $data['kesimpulan'] = $request->kesimpulan : null;
+            $request->kesimpulan ? $data['status'] = 'done' : null;
+            
 
             $pertemuan->update($data);
 
-            return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil mengubah pertemuan');
+            return back()->with('msg_success', 'Berhasil mengubah pertemuan');
         } catch (\Throwable $th) {
             return redirect()->route('pertemuan.index')->with('msg_error', 'Gagal mengubah pertemuan');
         }

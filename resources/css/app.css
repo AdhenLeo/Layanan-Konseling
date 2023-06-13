@@ -31,6 +31,9 @@
     .btn-primary-form{
         @apply px-7 py-2 text-base text-white bg-primary opacity-90 transition-colors hover:opacity-100 rounded-lg font-semibold
     }
+    .btn-danger-form{
+        @apply px-7 py-2 text-base text-white bg-danger opacity-90 transition-colors hover:opacity-100 rounded-lg font-semibold
+    }
     .btn-back-form{
         @apply px-7 py-2 text-base border rounded-lg font-semibold
     }
@@ -55,6 +58,9 @@
     .badge-primary{
         @apply text-[13px] font-bold px-5 text-center py-1 rounded-xl bg-secondary
     }
+    .badge-warning{
+        @apply text-[13px] font-bold px-5 text-center py-1 rounded-xl bg-warning-secondary
+    }
     .badge-danger{
         @apply text-[13px] font-bold px-3 text-center py-1 rounded-xl bg-danger-secondary
     }
@@ -72,6 +78,24 @@
     }
     .tag {
         @apply px-3 text-center py-1 rounded-lg bg-secondary text-[12px] font-semibold
+    }
+    .status-active{
+        @apply bg-primary w-11 h-11 rounded-full flex items-center justify-center text-white text-base
+    }
+    .status-non-active{
+        @apply bg-non-active w-11 h-11 rounded-full flex items-center justify-center text-base
+    }
+    .badge-status-waiting{
+        @apply font-bold text-primary text-[20px] px-4 py-2 bg-secondary w-fit rounded-xl mx-auto capitalize
+    }
+    .badge-status-pending{
+        @apply font-bold text-warning text-[20px] px-4 py-2 bg-warning-secondary w-fit rounded-xl mx-auto capitalize
+    }
+    .badge-status-accept{
+        @apply font-bold text-success text-[20px] px-4 py-2 bg-success-secondary w-fit rounded-xl mx-auto capitalize
+    }
+    .badge-status-done{
+        @apply font-bold text-primary text-[20px] px-4 py-2 bg-secondary w-fit rounded-xl mx-auto capitalize
     }
 }
 

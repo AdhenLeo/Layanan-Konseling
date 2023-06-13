@@ -8,77 +8,91 @@
     Pertemuan
 @endsection
 
-@section('content')
-    <div class="mt-12 rounded-[12px] w-5/6 h-[700px] mx-auto bg-white ">
-        <div class="p-15">
-            <div class="w-2/3 mx-auto flex justify-between my-5 p-10">
-                <div class="w-10 h-10 rounded-full bg-primary">
-                    <p class="text-center p-2 text-white">1</p>
-                </div>
-                <p class="text-center p-2">Waiting</p>
-                <div class="w-10 h-10 rounded-full bg-non-active">
-                    <p class="text-center p-2">2</p>
-                </div>
-                <p class="text-center p-2">Pending</p>
-                <div class="w-10 h-10 rounded-full bg-non-active">
-                    <p class="text-center p-2">3</p>
-                </div>
-                <p class="text-center p-2">Accept</p>
-                <div class="w-10 h-10 rounded-full bg-non-active">
-                    <p class="text-center p-2">4</p>
-                </div>
-                <p class="text-center p-2">Success</p>
-            </div>
-        </div>
-        <div class="w-[97%] h-[60vh] p-3 mx-auto border-t border-non-active flex flex-col justify-center">
-            <h1 class="text-center text-2xl text-yellow-300">Warning</h1>
-            <div class="w-full mx-auto h-3/4  mt-8 flex justify-between">
-                <div class="w-2/5">
-                    <div class="w-36 mt-8 ml-16 text-left ">
-                        <div class="mt-8">
-                            <p class="text-sm font-semibold">Tema Konseling</p>
-                        </div>
-                        <div class="mt-3 ">
-                            <input type="text"
-                                class="w-72 rounded-md px-5 py-2 bg-secondary text-base font-semibold text-center"
-                                value="" readonly>
-                        </div>
-                        <div class="mt-5">
-                            <p class="text-sm font-semibold">Waktu Pertemuan</p>
-                        </div>
-                        <div class="mt-3">
-                            <input type="text"
-                                class="w-72 rounded-md px-5 py-2 bg-secondary text-center font-semibold text-base"
-                                value="" readonly>
-                        </div>
-                        <div class="mt-5">
-                            <p class="text-sm font-semibold">Tempat Pertemuan</p>
-                        </div>
-                        <div class="mt-3">
-                            <input type="text"
-                                class="w-72 rounded-md px-5 py-2 bg-secondary text-base font-semibold text-center"
-                                value="" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class=" w-3/6 border-non-active ">
-                    <div class="mt-8">
-                        <p class="text-sm font-semibold">Deskripsi Singkat ( Opsional )</p>
-                    </div>
-                    <div class="mt-3">
-                        <textarea class="bg-secondary p-2 text-base rounded-xl" rows="3" name="" id="" cols="30"
-                            rows="10"></textarea>
-                    </div>
-                    <div class="mt-8">
-                        <p class="text-sm font-semibold">Kesimpulan Pertemuan ( Hari Ini )</p>
-                    </div>
-                    <div class="mt-3">
-                        <textarea class="bg-secondary p-2 text-base rounded-xl" rows="3" name="" id="" cols="30"
-                            rows="10"></textarea>
-                    </div>
-                </div>
+@section('modal')
+@include('partials.modals.modalreject')
+@endsection
 
+@section('content')
+<div class="p-5 my-12 rounded-xl bg-white shadow-card sm:w-11/12 w-4/5 mx-auto">
+    {{-- status --}}
+    <div class="sm:w-4/5 w-full sm:flex-row flex-col flex mx-auto sm:gap-0 gap-4 items-center sm:justify-evenly justify-start font-semibold">
+        <div class="flex items-center sm:flex-row flex-col gap-3">
+            <div class="{{ $data->status == "waiting" ? 'status-active' : 'status-non-active' }}">
+                <p>1</p>
             </div>
+            <p class="text-[19px]">Waiting</p>
+        </div>
+        <div class="flex items-center sm:flex-row flex-col gap-3">
+            <div class="{{ $data->status == "pending" ? 'status-active' : 'status-non-active' }}">
+                <p>2</p>
+            </div>
+            <p class="text-[19px]">Pending</p>
+        </div>
+        <div class="flex items-center sm:flex-row flex-col gap-3">
+            <div class="{{ $data->status == "accept" ? 'status-active' : 'status-non-active' }}">
+                <p>3</p>
+            </div>
+            <p class="text-[19px]">Accept</p>
+        </div>
+        <div class="flex items-center sm:flex-row flex-col gap-3">
+            <div class="{{ $data->status == "done" ? 'status-active' : 'status-non-active' }}">
+                <p>4</p>
+            </div>
+            <p class="text-[19px]">Done</p>
         </div>
     </div>
+
+    {{-- content --}}
+    <div class="mt-8 p-6 border-t border-non-active">
+        <p class="{{ $data->status == 'waiting' ? 'badge-status-waiting' : ($data->status == 'pending' ? 'badge-status-pending' : ($data->status == 'accept' ? 'badge-status-accept' : ($data->status == 'done' ? 'badge-status-done' : ''))) }}">{{ $data->status }}</p>
+        {{-- form --}}
+        <form action="{{ route('pertemuan.update', $data->id) }}" method="post">
+            @method('patch')
+            @csrf
+            <div class="mt-5 flex gap-7 justify-between mx-auto">
+                {{-- left --}}
+                <div class="w-full">
+                    <div class="">
+                        <p class="font-semibold">Tema Pertemuan</p>
+                        <input type="text" value="{{ $data->tema }}" disabled class="input-form">
+                    </div>
+                    <div class=" mt-3" {{ $data->tema == 'Bimbingan Karir' ? '' : 'hidden' }}>
+                        <p class="font-semibold">Jenis Karir</p>
+                        <input type="text" value="{{ $data->jenis_karir }}" disabled class="input-form">
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold">Waktu Pertemuan</p>
+                        <input type="datetime-local" value="{{ $data->tgl }}" disabled name="tgl" class="input-form">
+                        <small class="font-semibold">Jadwal sebelumnya : {{ Carbon\Carbon::parse($data->tgl)->translatedFormat('l, d F Y H:i') }}</small>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold">Tempat Pertemuan</p>
+                        <input type="text" value="{{ $data->tmpt }}" name="tmpt" disabled class="input-form">
+                    </div>
+                </div>
+                <div class="border-l border-non-active"></div>
+                {{-- right --}}
+                <div class="w-full">
+                    <div>
+                        <p class="font-semibold">Deskripsi singkat <span class="text-non-active">(opsional)</span></p>
+                        <textarea name="" disabled class="input-form" id="" cols="5">{{ $data->deskripsi }}</textarea>
+                    </div>
+                    <div class="mt-3" {{ $data->status == "accept" || $data->status == 'pending' && Auth::user()->role == 'guru' ? '': 'hidden' }}>
+                        <p class="font-semibold">Kesimpulan</p>
+                        <textarea name="kesimpulan" class="input-form" id="" cols="5">{{ $data->kesimpulan }}</textarea>
+                    </div>
+                </div>
+            </div>
+            {{-- button waiting --}}
+            <div class="mt-5 flex items-center gap-3 {{ $data->status != 'waiting' || Auth::user()->role != 'guru' ? 'hidden' : '' }}"> 
+                <button type="button" onclick="modal_reject.showModal()" class="btn-danger-form">Tunda</button>
+                <button class="btn-primary-form">Terima</button>
+            </div>
+            {{-- button accept --}}
+            <div class="mt-5 flex justify-end items-center gap-3 {{ $data->status != 'accept' && $data->status != 'pending' || Auth::user()->role != 'guru' ? 'hidden' : '' }}"> 
+                <button class="btn-primary-form">Selesaikan</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

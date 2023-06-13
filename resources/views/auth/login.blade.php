@@ -58,7 +58,7 @@
         </div>
 
         {{-- right --}}
-        <div class="bg-secondary rounded-2xl p-4 h-full w-1/2 flex-col items-center justify-center lg:flex hidden">
+        <div class="bg-secondary shadow-card-login rounded-2xl p-4 h-full w-1/2 flex-col items-center justify-center lg:flex hidden">
             <img src="{{ asset('img/logo_login.png') }}" alt="" class="w-64 h-64">
             <div class="mt-7 w-2/3">
                 <p class="text-center font-semibold text-[27px]">Improving your life with <span class="text-primary">DeepTalks</span></p>

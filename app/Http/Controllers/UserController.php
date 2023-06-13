@@ -49,6 +49,7 @@ class UserController extends Controller
         try {
             $data = [
                 'nama' => $request->nama,
+                'nip' => $request->nip,
                 'jk' => $request->jk,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -114,13 +115,13 @@ class UserController extends Controller
             if($request->profile){
                 $path = Storage::disk('public')->putFile('profile', $request->profile);
                 $data['profile'] = $path;
+                if(Storage::disk('public')->exists("$user->profile")){
+                    Storage::disk('public')->delete("$user->profile");
+                }
             }
 
             $request->password ? $data['password'] = Hash::make($request->password) : '';
 
-            if(Storage::disk('public')->exists("$user->profile")){
-                Storage::disk('public')->delete("$user->profile");
-            }
             $user->update($data);
 
             $request->role == 'guru' ? $this->updateGuru($request->all(), $user->id) : null;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{
     Kelas,
     Log,
+    Pertemuan,
     PetaKerawanan,
     User
 };
@@ -19,6 +20,14 @@ class DashboardController extends Controller
         $users = User::whereNot('role', 'admin')->get();
         $petakerawanans = PetaKerawanan::all();
         $logs = Log::with('user')->paginate(5);
-        return view('dashboard', compact('kelas', 'users', 'logs', 'petakerawanans'));
+
+        $datas = getCountAndPertemuans();
+
+        $countwaiting = $datas['countwaiting'];
+        $countpending = $datas['countpending'];
+        $countacc = $datas['countacc'];
+        $pertemuans = $datas['pertemuans'];
+
+        return view('dashboard', compact('kelas', 'users', 'logs', 'petakerawanans', 'pertemuans', 'countwaiting', 'countacc', 'countpending'));
     }
 }
