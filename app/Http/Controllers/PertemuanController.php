@@ -33,7 +33,7 @@ class PertemuanController extends Controller
     public function store(PostPertemuanRequest $request)
     {
         try {
-            // $datasiswa = User::with('kelas')->find(Atuh::user()->id);    
+            // $datasiswa = User::with('kelas')->find(Atuh::user()->id);
             // dd($datasiswa);
             $data = [
                 'user_id' => Auth::check() ? (Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id) : null,
@@ -45,10 +45,10 @@ class PertemuanController extends Controller
                 'status' => Auth::check() ? (Auth::user()->role == 'guru' ? 'accept' : 'waiting') : null
             ];
 
-            $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
-            
+            $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null;
+
             dd(Auth::check());
-            
+
             $pertemuan = Pertemuan::create($data);
             // dd($pertemuan);
 
@@ -58,9 +58,9 @@ class PertemuanController extends Controller
         }
     }
 
-    public function show(Pertemuan $pertemuan)
+    public function show($id)
     {
-        $data = Pertemuan::find($pertemuan->id);
+        $data = Pertemuan::find($id);
         return view('pertemuan.show', compact('data'));
     }
 
