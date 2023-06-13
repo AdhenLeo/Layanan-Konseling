@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pertemuan;
 use Illuminate\Http\Request;
 
 class ArsipController extends Controller
 {
     public function index()
     {
-        return view('arsip.index');
+        $datas = Pertemuan::with('siswa', 'guru')->get();
+        return view('arsip.index', compact('datas'));
     }
 
     public function create()
