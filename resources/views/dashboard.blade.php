@@ -16,5 +16,6 @@
     @endif
     @if (Auth::user()->role == 'guru')
     @include('partials.dashboards.guru')
+    @endif
 </div>
 @endsection
