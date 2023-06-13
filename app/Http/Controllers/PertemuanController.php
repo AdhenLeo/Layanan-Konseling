@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PertemuanExport;
 use App\Http\Requests\pertemuan\{
     PostPertemuanRequest,
     UpdatePertemuanRequest
@@ -15,6 +16,7 @@ use App\Models\{
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PertemuanController extends Controller
 {
@@ -108,4 +110,8 @@ class PertemuanController extends Controller
 
         return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil menghapus pertemuan');
     }
+
+    public function export(){
+        return Excel::download(new PertemuanExport, 'Data Pertemuan.xlsx');
+    } 
 }

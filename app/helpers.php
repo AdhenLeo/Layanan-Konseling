@@ -98,8 +98,15 @@ if (!function_exists('getCountAndPertemuans')) {
 
             // menggenerate pertemuan di dashboard di setiap role
             $pertemuans = Pertemuan::with('user', 'guru')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->where('status', 'waiting')->paginate(4);
-        }
+        }elseif(Auth::user()->role == 'admin'){
+            // menghitung count berdasarkan role
+            $countacc = Pertemuan::where('status', 'accept')->get();
+            $countpending = Pertemuan::where('status', 'pending')->get();
+            $countwaiting = Pertemuan::where('status', 'waiting')->get();
 
+            // menggenerate pertemuan di dashboard di setiap role
+            $pertemuans = Pertemuan::with('user', 'guru')->orderBy('id', 'DESC')->where('status', 'waiting')->paginate(4);
+        }
         return [
             'countacc' => $countacc,
             'countpending' => $countpending,

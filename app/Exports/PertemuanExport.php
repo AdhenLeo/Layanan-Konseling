@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Pertemuan;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\{
     FromCollection,
     WithHeadings,
@@ -20,19 +22,30 @@ class PertemuanExport implements FromCollection, WithHeadings, WithStyles
 {
     public function collection()
     {
-        $datas = Pertemuan::with('guru', 'user')->get();
-        $data = [
-            ''
-        ];
-        return collect([$data]);
+        $datas = Pertemuan::with('guru', 'user')->where('guru_id', Auth::user()->id)->where('status', 'done')->get();
+        $data = [];
+        foreach($datas as $pertemuan){
+            // dump('ok');
+            $data[] = [
+                'Tema Prtemuan' => $pertemuan->tema,
+                'Nama Murid' => $pertemuan->user->nama,
+                'Nama Guru' => $pertemuan->guru->nama,
+                'Tanggal Pertemuan' => Carbon::parse($pertemuan->tgl)->translatedFormat('l, d F Y H:i'),
+                'Tempat Pertemuan' => $pertemuan->tmpt,
+                'Kesimpulan' => $pertemuan->kesimpulan
+            ];
+        }
+        // dd($data);
+        
+        return collect($data);
     }
 
     public function headings(): array 
     {
         return [
+            'Tema Pertemuan',
             'Nama Murid',
             'Nama Guru',
-            'Tema',
             'Tanggal Pertemuan',
             'Tempat Pertemuan',
             'Kesimpulan',
@@ -52,7 +65,7 @@ class PertemuanExport implements FromCollection, WithHeadings, WithStyles
             ],
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFCB0C9F'],
+                'startColor' => ['rgb' => '4267AD'],
             ],
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,

@@ -52,6 +52,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('arsip',ArsipController::class);
     Route::resource('pertemuan',PertemuanController::class);
+    Route::prefix('pertemuan/excel')->name('pertemuan.')->group(function(){
+        Route::get('/export', [PertemuanController::class, 'export'])->name('export');
+    });
     // route profile
     Route::resource('profile', ProfileController::class);
     Route::prefix('profile/user/')->name('profile.')->group(function(){
