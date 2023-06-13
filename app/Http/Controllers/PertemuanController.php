@@ -52,9 +52,9 @@ class PertemuanController extends Controller
                 'status' => Auth::user()->role == 'guru' ? 'accept' : 'waiting',
             ];
 
-            // dd($data);
-
             $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
+            
+            dd(Auth::check());
             
             $pertemuan = Pertemuan::create($data);
             // dd($pertemuan);
@@ -65,9 +65,9 @@ class PertemuanController extends Controller
         }
     }
 
-    public function show(Pertemuan $pertemuan)
+    public function show($id)
     {
-        $data = Pertemuan::find($pertemuan->id);
+        $data = Pertemuan::find($id);
         return view('pertemuan.show', compact('data'));
     }
 
