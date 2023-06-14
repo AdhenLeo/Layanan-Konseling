@@ -77,7 +77,7 @@
                         <p class="font-semibold">Deskripsi singkat <span class="text-non-active">(opsional)</span></p>
                         <textarea name="" disabled class="input-form" id="" cols="5">{{ $data->deskripsi }}</textarea>
                     </div>
-                    <div class="mt-3" {{ $data->status == "accept" || $data->status == 'pending' && Auth::user()->role == 'guru' ? '': 'hidden' }}>
+                    <div class="mt-3" {{ $data->status == "accept" || $data->status == 'pending' || Auth::user()->role == 'guru' ? '': 'hidden' }}>
                         <p class="font-semibold">Kesimpulan</p>
                         <textarea name="kesimpulan" class="input-form" id="" cols="5">{{ $data->kesimpulan }}</textarea>
                     </div>
