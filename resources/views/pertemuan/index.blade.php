@@ -13,7 +13,7 @@
     <div class="flex sm:flex-row flex-col sm:gap-0 gap-3 justify-between">
         <p class="text-lg font-bold">Pertemuan</p>
         <div class="flex gap-3">
-            <a href="{{ route('pertemuan.export') }}" class=" text-center btn-primary">Export Pertemuan</a>
+            <a href="{{ route('pertemuan.export') }}" class=" text-center btn-primary {{ Auth::user()->role != 'guru' ? 'hidden' : '' }}">Export Pertemuan</a>
             <a href="{{ route('pertemuan.create') }}" class=" text-center btn-primary">Tambah Pertemuan</a>
         </div>
     </div>
