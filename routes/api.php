@@ -10,6 +10,7 @@ use App\Http\Controllers\{
 };
 use App\Http\Controllers\Api\{
     AuthApiController,
+    PertemuanApiController,
     UserApiController
 };
 use App\Http\Controllers\Auth\AuthController;
@@ -24,6 +25,6 @@ use Illuminate\Support\Facades\Route;
 // Route::resource('guru', GuruController::class);
 // Route::resource('walas', WaliKelasController::class);
 // Route::resource('petakerawanan', PetaKerawananController::class);
-// Route::resource('pertemuan', PertemuanController::class);
 // Route::resource('userapi', UserApiController::class);
+Route::apiResource('pertemuanapi', PertemuanApiController::class);
 Route::post('/login', [AuthApiController::class, 'postLogin']);

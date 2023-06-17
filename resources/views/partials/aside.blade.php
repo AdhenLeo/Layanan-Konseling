@@ -146,7 +146,7 @@
                     </a>
                 </li>
                 @endif
-                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
+                @if (Auth::user()->role == 'walas' || Auth::user()->role == 'guru')
                 <li>
                     <a href="{{ route('kelas.index') }}"
                         class="{{ Request::is('kelas*') ? 'icon-active-responsive' : 'px-2' }}">

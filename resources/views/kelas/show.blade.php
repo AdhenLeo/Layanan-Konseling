@@ -10,8 +10,9 @@
 
 @section('content')
 <div class="my-12 mx-auto bg-white sm:w-11/12 w-4/5 rounded-2xl h-fit p-5 shadow-md">
-    <div class="flex justify-start">
+    <div class="flex justify-between">
         <p class="text-lg font-bold">Siswa</p>
+        <a href="{{ route('userpetakerawanan.export', $datas->id) }}" class="btn-primary">Export Petakerawanan</a>
     </div>
     {{-- table --}}
     <div class="mt-5 overflow-auto">
@@ -37,7 +38,7 @@
                         <td>{{ $data->nama }}</td>
                         <td>{{ $data->email }}</td>
                         <td>
-                            <div class="grid grid-cols-3 gap-2">
+                            <div class="grid sm:grid-cols-3 grid-cols-1 gap-2">
                             @foreach ($data->kelas as $kelas)
                                 <p class="tag">{{ $kelas->nama }}</p>
                             @endforeach

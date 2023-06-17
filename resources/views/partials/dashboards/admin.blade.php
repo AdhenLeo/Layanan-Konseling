@@ -64,7 +64,7 @@
                             <td>{{ $i + $logs->firstItem() }}</td>
                             <td>{{ $log->user->nama }}</td>
                             <td><p class="w-fit badge-primary">{{ $log->user->role }}</p></td>
-                            <td>{{ Carbon\Carbon::parse($log->created_at)->translatedFormat('l, Y H:i') }}</td>
+                            <td>{{ Carbon\Carbon::parse($log->tgl)->translatedFormat('l, d F Y H:i') }}</td>
                             <td><p class="w-fit {{ $log->status =='login' ? 'badge-success' : 'badge-danger' }}">{{ $log->status }}</p></td>
                         </tr>
                     @endforeach

@@ -8,6 +8,10 @@
     Edit Profile
 @endsection
 
+@if (Auth::user()->role == 'guru')
+@include('partials.modals.modalkelasguru')
+@endif
+
 
 @section('content')
 <div class="w-11/12 my-10 flex sm:flex-row flex-col gap-8 mx-auto">
@@ -48,6 +52,9 @@
                                 </div>
                                 @endforeach
                             @endif
+                        </div>
+                        <div class="mt-5 flex {{ Auth::user()->role != 'guru' ? 'hidden' : '' }}">
+                            <button class="p-2 bg-primary flex items-center text-white rounded-full" onclick="modal_kelas_guru.showModal()"><span class="material-symbols-outlined">add_circle</span></button>
                         </div>
                     </div>
                 </div>
@@ -100,9 +107,13 @@
 @endsection
 
 @if (Auth::user()->role == 'guru')
-@section('js')
+@push('js')
     <script>
+        // Component.showKelas({route: "{{ route('userkelas.get') }}"})
         Component.showKelasGuru({route: "{{ route('userkelas.show', Auth::user()->id) }}"})
     </script>
-@endsection
+    <script>
+        new MultiSelectTag('kelas_id')
+    </script>
+@endpush
 @endif

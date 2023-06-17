@@ -6,7 +6,7 @@
                 <p class="text-[12px] min-w-max">{{ $data->peta_kerawanan->jenis }}</p>
             </div>
             <div class="flex items-center border-non-active border-l pl-2">
-                <span class="material-symbols-outlined cursor-pointer" onclick="Component.deletePetaKerawanan({route: '{{ route('profile.destroy', $data->id) }}', token: '{{ csrf_token() }}', routeshow: '{{ route('profile.show', 1) }}'})">cancel</span>
+                <span class="material-symbols-outlined cursor-pointer" onclick="Component.deletePetaKerawanan({route: '{{ route('profile.destroy', $data->id) }}', token: '{{ csrf_token() }}', routeshow: '{{ route('profile.show', $data->id) }}', routepeta: '{{ route('userpetakerawanan.peta', $data->id) }}'})">cancel</span>
             </div>
         </div>
     </div>

@@ -177,14 +177,4 @@ class UserController extends Controller
             return redirect()->route('guru.index')->with('msg_error', 'Gagal menambahkan guru');
         }
     }
-
-    public function showKelasGuru($id){
-        try {
-            $data = UserKelas::with('kelas', 'user')->where('user_id', $id)->get();
-
-            return view('');
-        } catch (\Throwable $th) {
-            return "msg_error";
-        }
-    }
 }

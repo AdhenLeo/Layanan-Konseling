@@ -41,7 +41,7 @@
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->email }}</td>
                             <td>
-                                <div class="grid grid-cols-3 gap-2">
+                                <div class="grid sm:grid-cols-3 grid-cols-1 gap-2">
                                 @foreach ($data->kelas as $kelas)
                                     <p class="tag">{{ $kelas->nama }}</p>
                                 @endforeach

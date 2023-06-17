@@ -12,7 +12,7 @@
 <div class="my-7 mx-auto bg-white sm:w-11/12 w-4/5 overflow-auto rounded-2xl h-fit p-5 shadow-md">
     <div class="flex sm:flex-row flex-col sm:gap-0 gap-3 justify-between">
         <p class="text-lg font-bold">Pertemuan</p>
-        <div class="flex gap-3">
+        <div class="flex gap-3 sm:flex-row flex-col-reverse">
             <a href="{{ route('pertemuan.export') }}" class=" text-center btn-primary {{ Auth::user()->role != 'guru' ? 'hidden' : '' }}">Export Pertemuan</a>
             <a href="{{ route('pertemuan.create') }}" class=" text-center btn-primary">Tambah Pertemuan</a>
         </div>

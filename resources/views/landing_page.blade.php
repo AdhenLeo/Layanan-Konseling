@@ -15,9 +15,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
         integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
-        {{-- js --}}
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+
+    {{-- js --}}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    
+    {{-- aos js --}}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
 
     <style>
         @keyframes increaseHeight {
@@ -115,9 +120,9 @@
             <h1 class="font-extrabold text-2xl text-primary-landing">Deep<span class="text-yellow-landing">Talk</span>
             </h1>
             <div class="font-semibold text-primary hidden w-1/2 lg:w-1/3 sm:flex justify-between">
-                <a href="">How to Konsul</a>
-                <a href="">Podcast</a>
-                <a href="">About Us</a>
+                <a href="" data-aos="fade-right">How to Konsul</a>
+                <a href="" data-aos="fade-right" >Podcast</a>
+                <a href="" data-aos="fade-right">About Us</a>
             </div>
             @if (Auth::check())
                 <a href="{{ route('dashboard') }}"
@@ -135,15 +140,26 @@
             <a href="" class="p-2">About Us</a>
         </div>
     </nav>
-    <div class="bg-gradient-to-b from-[#4267AD] via-[#4267AD] to-[#4267AD] w-full h-[80vh] max-h-[650px]"></div>
+    <div class="bg-gradient-to-b from-[#4267AD] via-[#4267AD] to-[#4267AD] w-full h-[80vh] max-h-[650px]">
+        <div class="mx-auto flex justify-between w-full h-[80vh] items-center">
+            <div class="w-2/4 h-2/3  flex items-center" data-aos="fade-up-right">
+                <h1 class="text-4xl text-left w-[80%] text-white mx-auto">Perbaiki dan Selesaikan masalahmu dengan
+                    <span class="font-bold text-warning">DeepTalk</span>
+                </h1>
+            </div>
+            <div data-aos="fade-up" class="w-2/4 h-2/3  flex justify-center items-center">
+                <img data-aos="fade-up" src="{{ asset('img/logo_landing.png') }}" class="w-3/4 " alt="">
+            </div>
+        </div>
+    </div>
     <div class="text-center items-center flex flex-col my-14 space-y-6">
-        <div class="w-16 h-2 bg-yellow-landing rounded-full"></div>
-        <h1 class="text-2xl">Kenapa pakai TB-BK?</h1>
-        <p class=" w-2/3 md:w-2/5">Kami akan membantu kamu mulai dari berbagai aspek yang mencangkup banyak masalah
+        <div class="w-16 h-2 bg-yellow-landing rounded-full" data-aos="fade-down"></div>
+        <h1 class="text-2xl" data-aos="fade-down">Kenapa pakai TB-BK?</h1>
+        <p class=" w-2/3 md:w-2/5" data-aos="fade-down">Kami akan membantu kamu mulai dari berbagai aspek yang mencangkup banyak masalah
             internal ataupun eksternal</p>
     </div>
     <div class="flex flex-col items-center lg:flex-row justify-around xl:px-32 px-5 md:px-10 my-24 space-y-5">
-        <div class="flex lg:w-fit lg:space-x-2 space-x-4">
+        <div class="flex lg:w-fit lg:space-x-2 space-x-4" data-aos="fade-up-right">
             <svg width="42" height="40" viewBox="0 0 42 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M4.15527 10C4.15527 8.93913 4.59306 7.92172 5.37233 7.17157C6.15159 6.42143 7.20851 6 8.31055 6H22.854C23.9561 6 25.013 6.42143 25.7923 7.17157C26.5715 7.92172 27.0093 8.93913 27.0093 10V18C27.0093 19.0609 26.5715 20.0783 25.7923 20.8284C25.013 21.5786 23.9561 22 22.854 22H18.6988L12.4658 28V22H8.31055C7.20851 22 6.15159 21.5786 5.37233 20.8284C4.59306 20.0783 4.15527 19.0609 4.15527 18V10Z"
@@ -152,14 +168,14 @@
                     d="M31.1647 14V18C31.1647 20.1217 30.2891 22.1566 28.7306 23.6569C27.172 25.1571 25.0582 26 22.8541 26H20.4191L16.75 29.534C17.3317 29.832 17.9945 30 18.6988 30H22.8541L29.087 36V30H33.2423C34.3444 30 35.4013 29.5786 36.1805 28.8284C36.9598 28.0783 37.3976 27.0609 37.3976 26V18C37.3976 16.9391 36.9598 15.9217 36.1805 15.1716C35.4013 14.4214 34.3444 14 33.2423 14H31.1647Z"
                     fill="#4267AD" />
             </svg>
-            <div class="lg:max-w-[240px] max-w-[300px]">
+            <div class="lg:max-w-[240px] max-w-[300px]" >
                 <h3 class="font-semibold text-base mb-2">Kesulitan Interaksi Sosial</h3>
                 <p class="font-medium text-xs leading-6 flex items-center justify-center text-justify">Untuk Kamu
                     memiliki masalah sulit berbicara, mengatakan suatu hal pada orang lain dan merasa sulit sekali
                     bergaul.</p>
             </div>
         </div>
-        <div class="flex lg:w-fit lg:space-x-2 space-x-4">
+        <div class="flex lg:w-fit lg:space-x-2 space-x-4" data-aos="fade-up">
             <svg width="42" height="40" viewBox="0 0 42 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M31.0448 18.3333C33.5616 18.3333 35.8926 19.1166 37.8013 20.4333V13.3333C37.8013 11.4833 36.298 9.99992 34.423 9.99992H27.6665V6.66659C27.6665 4.81659 26.1632 3.33325 24.2882 3.33325H17.5317C15.6567 3.33325 14.1534 4.81659 14.1534 6.66659V9.99992H7.39683C5.52189 9.99992 4.03545 11.4833 4.03545 13.3333L4.01855 31.6666C4.01855 33.5166 5.52189 34.9999 7.39683 34.9999H20.3694C19.5124 33.2224 19.1255 31.2598 19.2447 29.295C19.3639 27.3301 19.9853 25.4271 21.0511 23.7631C22.1169 22.0992 23.5923 20.7287 25.3397 19.7792C27.0872 18.8298 29.0499 18.3323 31.0448 18.3333ZM17.5317 6.66659H24.2882V9.99992H17.5317V6.66659Z"
@@ -174,7 +190,7 @@
                     waktu belajar? main? istirahat? ini tema yang cocok banget nih!</p>
             </div>
         </div>
-        <div class="flex lg:w-fit lg:space-x-2 space-x-4">
+        <div class="flex lg:w-fit lg:space-x-2 space-x-4" data-aos="fade-up-left">
             <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M4.65322 24.5266L5.5265 27.7466C6.54674 31.5049 7.05855 33.3849 8.21561 34.6032C9.12884 35.5646 10.3103 36.2373 11.6108 36.5366C13.2594 36.9166 15.1647 36.4132 18.9754 35.4066C22.7827 34.3999 24.6881 33.8966 25.9229 32.7549C26.0242 32.6599 26.1255 32.5616 26.2201 32.4616C25.6449 32.41 25.0731 32.3265 24.5074 32.2116C23.3317 31.9816 21.9348 31.6116 20.2828 31.1749L20.1021 31.1266L20.0599 31.1166C18.2626 30.6399 16.761 30.2432 15.5617 29.8166C14.2999 29.3666 13.1547 28.8116 12.18 27.9116C10.8394 26.6722 9.90123 25.0686 9.48415 23.3032C9.18011 22.0216 9.26794 20.7649 9.50442 19.4632C9.73077 18.2149 10.1362 16.7182 10.6226 14.9266L11.5263 11.6032L11.5567 11.4866C8.31358 12.3482 6.60586 12.8582 5.46738 13.9099C4.49189 14.8117 3.80941 15.9787 3.50629 17.2632C3.12117 18.8882 3.63129 20.7682 4.65322 24.5266Z"
@@ -192,8 +208,8 @@
         </div>
     </div>
     {{-- Guru start --}}
-    <div class="flex justify-center text-2xl">
-        <h1 class="font-semibold">Guru Bimbingan</h1>
+    <div class="flex justify-center">
+        <h1 class="font-semibold text-3xl text-primary" data-aos="fade-up">Guru Bimbingan</h1>
     </div>
     <div class="flex justify-center items-center h-[80vh] w-full  ">
         <div class=" w-full h-fit overflow-x-auto bg-primary">
@@ -202,32 +218,33 @@
                 <section class="flex justify-center  text-neutral-700 dark:text-neutral-300 w-screen overflow-x-auto">
                     <!--First Guru-->
                     @foreach ($datas as $data)
-                    <div class="gap-6 text-center flex p-4">
-                        <div>
-                            <div
-                                class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 dark:shadow-black/30 w-56">
-                                <div class="h-28 overflow-hidden rounded-t-lg bg-slate-800"></div>
+                        <div class="gap-6 text-center flex p-4" data-aos="fade-left">
+                            <div>
                                 <div
-                                    class="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800">
-                                    <img src="{{ $data->user->profile != 'img/profile.png' ? asset('storage/'.$data->user->profile) : asset($data->user->profile) }}" />
-                                </div>
-                                <div class="p-6">
-                                    <h4 class="mb-4 text-2xl font-semibold">{{ $data->user->nama }}</h4>
-                                    <hr />
-                                    <div class="mt-4 overflow-auto h-[100px]">
-                                        <p class="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                class="inline-block h-7 w-7 pr-2" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-                                            </svg>
-                                            {{ $data->visi }}
-                                        </p>
+                                    class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 dark:shadow-black/30 w-56">
+                                    <div class="h-28 overflow-hidden rounded-t-lg bg-[#3C4556]"></div>
+                                    <div
+                                        class="mx-auto -mt-12 w-24 h-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800">
+                                        <img
+                                            src="{{ $data->user->profile != 'img/profile.png' ? asset('storage/' . $data->user->profile) : asset($data->user->profile) }}" />
+                                    </div>
+                                    <div class="p-6">
+                                        <h4 class="mb-4 text-2xl font-semibold">{{ $data->user->nama }}</h4>
+                                        <hr />
+                                        <div class="mt-4 overflow-auto h-[100px]">
+                                            <p class="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    class="inline-block h-7 w-7 pr-2" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                                                </svg>
+                                                {{ $data->visi }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </section>
             </div>
@@ -285,6 +302,14 @@
     <script src="{{ asset('assets/js/menu.js') }}"></script>
     <script src="{{ asset('assets/js/dropdown.js') }}"></script>
     @stack('js')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            offset: 500,
+            duration: 1000
+        });
+    </script>
 </body>
 
 </html>

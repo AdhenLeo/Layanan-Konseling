@@ -37,9 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kelas',KelasController::class);
     // route user
     Route::resource('user',UserController::class);
-    Route::prefix('userkelas')->name('userkelas.')->group(function(){
-        Route::get('/showkelasguru/{id}', [UserController::class, 'showKelasGuru'])->name('show');
-        Route::delete('/destroykelasguru/{id}', [UserController::class, 'destroyKelasguru'])->name('destroy');
+    Route::prefix('user/kelas')->name('userkelas.')->group(function(){
+        Route::get('/get', [KelasController::class, 'showKelas'])->name('get');
+        Route::get('/show/{id}', [KelasController::class, 'showKelasGuru'])->name('show');
+        Route::delete('/destroy/{iduser}/{idkelas}', [KelasController::class, 'destroyKelasguru'])->name('destroy');
     });
 
     Route::resource('aktivitas',AktivitasController::class);
@@ -49,16 +50,22 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::resource('userpetakerawanan', UserPetaKerawananController::class);
+    Route::prefix('userpetakerawanan/show')->name('userpetakerawanan.')->group(function(){
+        Route::get('/peta/{id}', [UserPetaKerawananController::class, 'showpeta'])->name('peta');
+        Route::get('/export/{id}', [UserPetaKerawananController::class, 'export'])->name('export');
+    });
     
     Route::resource('arsip',ArsipController::class);
     Route::resource('pertemuan',PertemuanController::class);
     Route::prefix('pertemuan/excel')->name('pertemuan.')->group(function(){
         Route::get('/export', [PertemuanController::class, 'export'])->name('export');
+        Route::get('/reject/{id}', [PertemuanController::class, 'reject'])->name('reject');
     });
     // route profile
     Route::resource('profile', ProfileController::class);
     Route::prefix('profile/user/')->name('profile.')->group(function(){
         Route::get('form', [ProfileController::class, 'formProfile'])->name('formedit');
+        Route::post('kelas', [ProfileController::class, 'addKElas'])->name('addKelas');
     });
 
     Route::get('/generatepdf', function(){

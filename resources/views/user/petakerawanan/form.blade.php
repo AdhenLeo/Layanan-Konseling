@@ -109,5 +109,6 @@
 @push('js')
     <script>
         Component.showPetaKerawanan({route: "{{ route('userpetakerawanan.show', $data->id) }}"})
+        Component.showDataPetaKerawanan({route: "{{ route('userpetakerawanan.peta', $data->id) }}"})
     </script>
 @endpush

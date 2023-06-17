@@ -41,16 +41,20 @@
             </div>
             <div hidden id="content">
                 {{-- content --}}
-                @if (Auth::user()->role == 'guru')
-                <div class="mt-3">
+                <div class="mt-3" id="murid" {{ Auth::user()->role != 'guru' ? 'hidden' : '' }}>
                     <p class="font-semibold text-base text-non-active mb-2">Murid</p>
-                    <select {{ isset($data) ? 'disabled' : '' }} multiple name="user_id" id="user_id" class="input-select">
-                        @foreach ($siswas as $siswa)
-                        <option value='{{ $siswa->user->id }}' {{ isset($data) ? ($data->user_id == $siswa->user->id ? "selected" : "") : '' }}>{{ $siswa->user->nama }}</option>
-                        @endforeach
+                    <select {{ isset($data) ? 'disabled' : '' }} multiple name="user_id[]" id="user_id" class="input-select">
+                        @if (Auth::user()->role == 'guru')
+                            @foreach ($siswas as $siswa)
+                            <option value='{{ $siswa->user->id }}' {{ isset($data) ? ($data->user_id == $siswa->user->id ? "selected" : "") : '' }}>{{ $siswa->user->nama }}</option>
+                            @endforeach
+                        @elseif(Auth::user()->role == 'user')
+                            @foreach ($siswas as $siswa)
+                            <option value='{{ $siswa->id }}' {{ isset($data) ? ($data_id == $siswa->id ? "selected" : "") : '' }}>{{ $siswa->nama }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
-                @endif
                 <div class="mt-3">
                     <p class="font-semibold text-base text-non-active mb-2">Tanggal Pertemuan</p>
                     <input type="datetime-local" class='input-form' name="tgl" value="{{ isset($data) ? $data->tgl : old('tgl') }}" required>
@@ -78,6 +82,11 @@
         $('#tema').change(function (e) { 
             console.log($(this).val())
             $(this).val() == 'Bimbingan Karir' ? $("#jenisKarir").removeAttr('hidden') : $('#jenisKarir').attr('hidden', true);;
+
+            if('{{ Auth::user()->role }}' == 'user'){
+                $(this).val() == 'Bimbingan Sosial' ? $("#murid").removeAttr('hidden') : $('#murid').attr('hidden', true);
+                $(this).val() == 'Bimbingan Sosial' ? $("#murid").removeAttr('hidden') : $('#murid').attr('disabled', true);
+            }
 
             $(this).val() == '' ? $('#content').attr('hidden', true) : $('#content').removeAttr('hidden');
         });

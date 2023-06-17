@@ -15,6 +15,7 @@ class KelasController extends Controller
     public function __construct()
     {
         $this->middleware('AdminOrGuruOrWalas');
+        $this->middleware('isCantAdmin')->only(['show']);
     }
 
     public function index()
@@ -80,5 +81,27 @@ class KelasController extends Controller
         $kelas->delete();
 
         return redirect()->route('kelas.index')->with('msg_success', 'Berhasil menghapus kelas');
+    }
+
+    public function showKelasGuru($id){
+        try {
+            $datas = UserKelas::with('kelas', 'user')->where('user_id', $id)->get();
+
+            return view('profile.partials.userkelas', compact('datas'));
+        } catch (\Throwable $th) {
+            return "msg_error";
+        }
+    }
+
+    public function destroyKelasguru($iduser, $idkelas){
+        try {
+            $data = UserKelas::where('user_id', $iduser)->where('kelas_id', $idkelas)->first();
+
+            $data->delete();
+            
+            return 'msg_success';
+        } catch (\Throwable $th) {
+            return 'msg_error';
+        }
     }
 }

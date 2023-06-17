@@ -30,7 +30,7 @@ class AuthApiController extends Controller
             }
             
             $token = $data->createToken($request->device_name)->plainTextToken;
-            insertLog('login');
+            insertLog('login', $data->id);
 
             $data->profile = Storage::disk('public')->exists($data->profile) ? Storage::disk('public')->url($data->profile) : asset($data->profile);
 

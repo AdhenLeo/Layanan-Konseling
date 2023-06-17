@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isCanGuru')->only('addKelas');
+    }
     public function index()
     {
         return view('profile.index');
@@ -19,14 +23,10 @@ class ProfileController extends Controller
     
     public function formProfile(){
         $data = User::with('kelas')->find(Auth::user()->id);
-        $dataKelas = Kelas::all();
-        $datas = UserKelas::with('kelas', 'user')->where('user_id', Auth::user()->id)->get();
-        $datakelass = [];
-        foreach($datas as $i => $kelas){
-            $datakelass[] = $kelas->kelas_id;
-        }
+        $idkelas = getKelas();
+        $datas = Kelas::all();
 
-        return view('profile.form', compact('data', 'dataKelas', 'datakelass'));
+        return view('profile.form', compact('data', 'datas', 'idkelas'));
     }
     
     public function create()
@@ -82,5 +82,19 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addKelas(Request $req)
+    {
+        try {
+            foreach($req->kelas_id as $kelas){
+                UserKelas::create(['user_id' => Auth::user()->id, 'kelas_id' => $kelas]);
+            }
+
+            return back()->with('msg_success', 'Berhasil menambahkan kelas');
+        } catch (\Throwable $th) {
+            return back()->with('msg_error', 'Gagal menambahkan kelas');
+        }
+        
     }
 }

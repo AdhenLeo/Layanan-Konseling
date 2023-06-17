@@ -77,7 +77,7 @@
 @endif
 
 @if (Auth::user()->role == 'guru')
-<div class="my-12 mx-auto sm:w-11/12 w-4/5 grid grid-cols-2 gap-4">
+<div class="my-12 mx-auto sm:w-11/12 w-4/5 grid sm:grid-cols-2 grid-cols-1 gap-4">
     @foreach ($kelas as $datakelas)
     <div class="w-full bg-white p-5 flex items-center rounded-xl shadow-card justify-between">
         <div class="flex flex-col">

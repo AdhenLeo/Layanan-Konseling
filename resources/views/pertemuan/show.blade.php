@@ -40,11 +40,17 @@
             </div>
             <p class="text-[19px]">Done</p>
         </div>
+        <div class="flex items-center sm:flex-row flex-col gap-3">
+            <div class="{{ $data->status == "reject" ? 'status-active' : 'status-non-active' }}">
+                <p>5</p>
+            </div>
+            <p class="text-[19px]">Reject</p>
+        </div>
     </div>
 
     {{-- content --}}
     <div class="mt-8 p-6 border-t border-non-active">
-        <p class="{{ $data->status == 'waiting' ? 'badge-status-waiting' : ($data->status == 'pending' ? 'badge-status-pending' : ($data->status == 'accept' ? 'badge-status-accept' : ($data->status == 'done' ? 'badge-status-done' : ''))) }}">{{ $data->status }}</p>
+        <p class="{{ $data->status == 'waiting' ? 'badge-status-waiting' : ($data->status == 'pending' ? 'badge-status-pending' : ($data->status == 'accept' ? 'badge-status-accept' : ($data->status == 'done' ? 'badge-status-done' : ($data->status == 'reject' ? 'badge-status-danger' : '')))) }}">{{ $data->status }}</p>
         {{-- form --}}
         <form action="{{ route('pertemuan.update', $data->id) }}" method="post">
             @method('patch')
@@ -77,9 +83,9 @@
                         <p class="font-semibold">Deskripsi singkat <span class="text-non-active">(opsional)</span></p>
                         <textarea name="" disabled class="input-form" id="" cols="5">{{ $data->deskripsi }}</textarea>
                     </div>
-                    <div class="mt-3" {{ $data->status == "accept" || $data->status == 'pending' || Auth::user()->role == 'guru' ? '': 'hidden' }}>
+                    <div class="mt-3" {{ $data->status == "accept" && Auth::user()->role == 'guru' || $data->status == 'pending' && Auth::user()->role == 'guru' || $data->status == 'done' && Auth::user()->role == 'guru'  ? '': 'hidden' }}>
                         <p class="font-semibold">Kesimpulan</p>
-                        <textarea name="kesimpulan" class="input-form" id="" cols="5">{{ $data->kesimpulan }}</textarea>
+                        <textarea name="kesimpulan" class="input-form" id="" cols="5" {{ $data->status == 'done' ? 'disabled':'' }}>{{ $data->kesimpulan }}</textarea>
                     </div>
                 </div>
             </div>
@@ -90,6 +96,7 @@
             </div>
             {{-- button accept --}}
             <div class="mt-5 flex justify-end items-center gap-3 {{ $data->status != 'accept' && $data->status != 'pending' || Auth::user()->role != 'guru' ? 'hidden' : '' }}"> 
+                <a href="{{ route('pertemuan.reject', $data->id) }}" class="btn-danger-form" type="button">Tidak Datang</a>
                 <button class="btn-primary-form">Selesaikan</button>
             </div>
         </form>

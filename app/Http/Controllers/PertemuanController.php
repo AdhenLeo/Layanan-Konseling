@@ -45,7 +45,7 @@ class PertemuanController extends Controller
         try {
             $guru = getGuruSiswa();
             $data = [
-                'user_id' => Auth::user()->role == 'user' ? Auth::user()->id : $request->user_id,
+                'user_id' => Auth::user()->role == 'user' ? Auth::user()->id : (Auth::user()->role == 'guru' ? $request->user_id : null),
                 'guru_id' => Auth::user()->role == 'guru' ? Auth::user()->id : $guru->user->id,
                 'tema' => $request->tema,
                 'tgl' => Carbon::parse($request->tgl),
@@ -56,7 +56,14 @@ class PertemuanController extends Controller
 
             $request->tema == 'Bimbingan Karir' && isset($request->jenis_karir) ? $data['jenis_karir'] = $request->jenis_karir : null; 
             
-            $pertemuan = Pertemuan::create($data);
+            Auth::user()->role == 'user' ? $pertemuan = Pertemuan::create($data) : null;
+
+            if($request->user_id){
+                foreach($request->user_id as $userid){
+                    $data['user_id'] = $userid;
+                    $pertemuan = Pertemuan::create($data);
+                }
+            }
 
             return redirect()->route('pertemuan.index')->with('msg_success', 'Berhasil membuat pertemuan');
         } catch (\Throwable $th) {
@@ -68,10 +75,18 @@ class PertemuanController extends Controller
     {
         $data = Pertemuan::find($id);
 
-        $date = Carbon::parse($data->tgl);
+        $date = Carbon::parse($data->tgl, 'Asia/Jakarta');
+        $datenow = Carbon::now('Asia/Jakarta');
+        $endTime = $date->addMinutes(2);
+
         if($date->isPast() && $data->status == 'pending'){
             $data->update(['status'=> 'accept']);
         }
+
+        if($datenow->lessThan($endTime) && $data->status == 'accept'){
+            $data->update(['status'=> 'reject']);
+        }
+        // dd($datenow->lessThan($endTime));
         
         return view('pertemuan.show', compact('data'));
     }
@@ -114,4 +129,15 @@ class PertemuanController extends Controller
     public function export(){
         return Excel::download(new PertemuanExport, 'Data Pertemuan.xlsx');
     } 
+
+    public function reject($id){
+        try {
+            $data = Pertemuan::find($id);
+            $data->update(['status' => 'reject']);
+
+            return back()->with('msg_success', 'Berhasil mengubah pertemuan');
+        } catch (\Throwable $th) {
+            return back()->with('msg_error', 'Gagal mengubah pertemuan');
+        }
+    }
 }

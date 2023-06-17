@@ -42,6 +42,18 @@ class Component {
         }
     }
 
+    static showDataPetaKerawanan = ({route: route}) => {
+        // console.log(route)
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function (res) {
+                // console.log(res);
+                $('#checkboxpeta').html(res);
+            }
+        });
+    }
+
     static showPetaKerawanan = ({route: route}) => {
         // console.log(route)
         $.ajax({
@@ -54,7 +66,7 @@ class Component {
         });
     }
 
-    static deletePetaKerawanan = ({route: route, token: token, routeshow: routeshow}) => {
+    static deletePetaKerawanan = ({route: route, token: token, routeshow: routeshow, routepeta: routepeta}) => {
         console.log(routeshow)
         $.ajax({
             type: "DELETE",
@@ -66,13 +78,29 @@ class Component {
                 if(res == "msg_success") {
                     Component.showAlert('Berhasil menghapus peta kerawanan pada siswa', 'success')
                     Component.showPetaKerawanan({route: routeshow})
+                    Component.showDataPetaKerawanan({route: routepeta})
                 }
             }
         });
     }
 
+    static showKelas = ({route: route}) => {
+        // console.log(route)
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function (res) {
+                console.log(res);
+                $('#kelas_id').html(`<option value="1" hidden>XI PPLG 1</option>
+                <option value="2" hidden>XI PPLG 2</option>
+                <option value="3" >XI PPLG 3</option>
+                <option value="4" >XI PPLG 4</option>`);
+            }
+        });
+    }
+
     static showKelasGuru = ({route: route}) => {
-        console.log(route)
+        // console.log(route)
         $.ajax({
             type: "GET",
             url: route,
@@ -84,7 +112,7 @@ class Component {
     }
 
     static deleteKelasGuru = ({route: route, token: token, routeshow: routeshow}) => {
-        // console.log(routeshow)
+        console.log(routeshow)
         $.ajax({
             type: "DELETE",
             url: route,
@@ -92,9 +120,10 @@ class Component {
                 _token: token,
             },
             success: function (res) {
+                console.log(res)
                 if(res == "msg_success") {
-                    Component.showAlert('Berhasil menghapus peta kerawanan pada siswa', 'success')
-                    Component.showPetaKerawanan({route: routeshow})
+                    Component.showAlert('Berhasil menghapus kelas anda', 'success')
+                    Component.showKelasGuru({route: routeshow})
                 }
             }
         });
