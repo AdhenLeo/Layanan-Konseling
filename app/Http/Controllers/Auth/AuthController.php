@@ -20,8 +20,7 @@ class AuthController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-        $data = User::where('email', $request->email)->first();
-        
+        $data = User::with('kelas')->where('email', $request->email)->first();
         if(!$data || !Hash::check($request->password, $data->password)){
             return redirect()->route('auth.login')->with('msg_error', 'Email atau password salah');
         }

@@ -31,7 +31,7 @@ class Component {
             iziToast.error({
                 title: 'Failed',
                 message: message,
-                position: 'topRight'
+                position: 'topRight',
             });
         }else if(type == 'info'){
             iziToast.info({
